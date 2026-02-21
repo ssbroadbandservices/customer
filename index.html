@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Broadband | Future of Connectivity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Nexus Broadband | High-Speed Internet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -14,55 +14,32 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #0a0a0f;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0c;
             color: #ffffff;
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.5;
         }
 
-        /* ===== CYBER GRID BACKGROUND ===== */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -1;
+        /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== GLOWING ORBS ===== */
-        .orb {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
-            filter: blur(60px);
-            pointer-events: none;
-            z-index: -1;
-            animation: floatOrb 20s infinite alternate;
-        }
-
-        .orb-1 { top: -100px; left: -100px; }
-        .orb-2 { bottom: -100px; right: -100px; background: radial-gradient(circle at center, rgba(255, 0, 255, 0.1) 0%, transparent 70%); animation-delay: -5s; }
-        .orb-3 { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle at center, rgba(0, 150, 255, 0.08) 0%, transparent 70%); animation: pulseOrb 15s infinite; }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.2); }
-        }
-
-        @keyframes pulseOrb {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.3); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+            opacity: 1;
+            transition: opacity 0.4s ease;
         }
 
         /* ===== LOADING SCREEN ===== */
@@ -72,12 +49,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0f;
+            background: #0a0a0c;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 1s ease, visibility 1s ease;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
         .loading-content {
@@ -85,45 +63,24 @@
         }
 
         .loader {
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(0, 255, 255, 0.1);
-            border-top: 4px solid #00ffff;
-            border-right: 4px solid #ff00ff;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(0, 136, 255, 0.1);
+            border-top: 2px solid #0088ff;
             border-radius: 50%;
-            margin: 0 auto 30px;
-            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            margin: 0 auto 16px;
+            animation: spin 0.8s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
         }
 
         .loading-content h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .loading-content p {
-            color: #888;
-            letter-spacing: 2px;
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 1s ease;
-            position: relative;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
         }
 
         /* ===== HEADER ===== */
@@ -131,102 +88,79 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px;
-            background: rgba(10, 10, 15, 0.8);
+            padding: 12px 16px;
+            background: rgba(18, 18, 22, 0.8);
             backdrop-filter: blur(10px);
-            border-radius: 60px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 40px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: sticky;
+            top: 16px;
             z-index: 100;
-            animation: slideDown 0.8s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border-radius: 15px;
+            width: 36px;
+            height: 36px;
+            background: #0088ff;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            transform: rotate(45deg);
-            transition: transform 0.5s ease;
-        }
-
-        .logo-icon i {
-            transform: rotate(-45deg);
-            color: #0a0a0f;
-        }
-
-        .logo:hover .logo-icon {
-            transform: rotate(225deg);
+            font-size: 1.2rem;
+            color: #0a0a0c;
         }
 
         .logo-text h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
         }
 
         .logo-text p {
-            font-size: 0.8rem;
-            color: #00ffff;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            color: #888;
+            letter-spacing: 0.5px;
         }
 
-        /* ===== MENU TOGGLE (3 LINES) ===== */
+        /* ===== MENU TOGGLE ===== */
         .menu-toggle {
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            position: relative;
-            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
         }
 
-        .menu-toggle:hover {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: #ff00ff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        .menu-toggle:active {
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .menu-toggle span {
-            width: 30px;
-            height: 3px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            border-radius: 3px;
-            transition: all 0.3s ease;
+            width: 18px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.2s ease;
         }
 
         .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-            width: 25px;
+            transform: rotate(45deg) translate(5px, 5px);
+            width: 16px;
         }
 
         .menu-toggle.active span:nth-child(2) {
@@ -234,24 +168,25 @@
         }
 
         .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-            width: 25px;
+            transform: rotate(-45deg) translate(5px, -5px);
+            width: 16px;
         }
 
         /* ===== SIDE MENU ===== */
         .side-menu {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
             height: 100vh;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-left: 2px solid rgba(0, 255, 255, 0.3);
+            background: rgba(18, 18, 22, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 2000;
-            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            padding: 30px;
-            box-shadow: -10px 0 50px rgba(0, 255, 255, 0.2);
+            transition: right 0.3s ease;
+            padding: 24px 20px;
         }
 
         .side-menu.active {
@@ -262,97 +197,64 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 50px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .menu-header h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 2rem;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0088ff;
         }
 
         .close-menu {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 0, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
-            color: #ff00ff;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 0, 255, 0.3);
+            font-size: 1.1rem;
         }
 
-        .close-menu:hover {
-            background: #ff00ff;
-            color: #0a0a0f;
-            transform: rotate(90deg);
+        .close-menu:active {
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .menu-items {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 8px;
         }
 
         .menu-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
+            gap: 14px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            transition: background 0.2s ease;
         }
 
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .menu-item:hover::before {
-            left: 100%;
-        }
-
-        .menu-item:hover {
-            border-color: #00ffff;
-            transform: translateX(-10px);
-            background: rgba(0, 255, 255, 0.05);
-            box-shadow: -5px 5px 20px rgba(0, 255, 255, 0.2);
+        .menu-item:active {
+            background: rgba(0, 136, 255, 0.1);
         }
 
         .menu-item i {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            background: #0088ff;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0a0a0f;
-            font-size: 1.2rem;
-        }
-
-        .menu-item span {
-            font-size: 1.2rem;
-            font-weight: 600;
+            color: #0a0a0c;
+            font-size: 0.9rem;
         }
 
         .menu-overlay {
@@ -361,8 +263,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
             z-index: 1999;
             opacity: 0;
             visibility: hidden;
@@ -377,714 +280,564 @@
         /* ===== HERO SECTION ===== */
         .hero {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 80px;
-            padding: 0 20px;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero-content {
-            max-width: 600px;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
         .hero-content h2 {
-            font-size: 4rem;
-            font-weight: 800;
-            font-family: 'Syne', sans-serif;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .glitch-text {
-            position: relative;
-            color: #fff;
-            text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75);
-            animation: glitch 725ms infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% { text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75); }
-            25% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75), 0.025em 0.05em 0 rgba(0, 255, 255, 0.75); }
-            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75), 0.05em 0 0 rgba(0, 255, 255, 0.75); }
-            75% { text-shadow: -0.025em 0 0 rgba(255, 0, 255, 0.75), -0.025em -0.05em 0 rgba(0, 255, 255, 0.75); }
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #aaa;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            margin-bottom: 24px;
         }
 
         .hero-stats {
             display: flex;
-            gap: 40px;
-        }
-
-        .stat {
-            text-align: center;
+            gap: 24px;
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            font-family: 'Syne', sans-serif;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0088ff;
+            margin-bottom: 2px;
         }
 
         .stat-label {
-            font-size: 0.9rem;
             color: #888;
+            font-size: 0.8rem;
         }
 
-        .hero-3d {
-            position: relative;
-            width: 400px;
-            height: 400px;
-        }
-
-        .floating-cube {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-            border: 2px solid rgba(0, 255, 255, 0.5);
-            transform-style: preserve-3d;
-            animation: floatCube 10s infinite alternate;
-        }
-
-        @keyframes floatCube {
-            0% { transform: rotateX(0deg) rotateY(0deg) translateZ(0); }
-            100% { transform: rotateX(45deg) rotateY(45deg) translateZ(50px); }
-        }
-
-        /* ===== PACKAGES SHOWCASE ===== */
-        .packages-showcase {
-            margin-bottom: 80px;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
+        /* ===== SECTION TITLE ===== */
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 24px;
         }
 
         .section-title h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         .section-title p {
             color: #888;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
+        /* ===== PACKAGE CARDS ===== */
         .package-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 20px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 40px;
         }
 
         .package-card {
-            background: rgba(20, 20, 30, 0.5);
+            background: rgba(18, 18, 22, 0.6);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px 30px;
-            text-align: center;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s ease, border-color 0.2s ease;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
         }
 
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .package-card:hover::before {
-            left: 100%;
-        }
-
-        .package-card:hover {
-            transform: translateY(-20px) scale(1.05);
-            border-color: #00ffff;
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        .package-card:active {
+            transform: scale(0.98);
+            border-color: #0088ff;
         }
 
         .package-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border-radius: 30px;
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 3rem;
-            color: #0a0a0f;
-            transform: rotate(45deg);
-            transition: transform 0.5s ease;
-        }
-
-        .package-card:hover .package-icon {
-            transform: rotate(225deg);
-        }
-
-        .package-icon i {
-            transform: rotate(-45deg);
+            font-size: 1.5rem;
+            color: #0088ff;
+            margin-bottom: 16px;
         }
 
         .package-card h3 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .package-card p {
             color: #aaa;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
         }
 
         .package-features {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .package-features li {
-            padding: 8px 0;
-            color: #ddd;
+            padding: 6px 0;
+            color: #ccc;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .package-features i {
-            color: #00ffff;
-        }
-
-        .package-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ff00ff;
-        }
-
-        .package-price span {
-            font-size: 1rem;
-            color: #888;
-        }
-
-        /* ===== IPTV/OTT BOXES ===== */
-        .ott-showcase {
-            margin-bottom: 80px;
-            animation: fadeInUp 1s ease 0.9s both;
-        }
-
-        .ott-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            padding: 20px;
-        }
-
-        .ott-box {
-            background: linear-gradient(135deg, #1a1a2a, #0a0a1a);
-            border-radius: 25px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ott-box::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .ott-box:hover::after {
-            opacity: 1;
-        }
-
-        .ott-box:hover {
-            border-color: #00ffff;
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
-        }
-
-        .ott-box i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .ott-box h4 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .ott-box .ott-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ff00ff;
-        }
-
-        .ott-box .ott-channel {
-            color: #888;
+            gap: 8px;
             font-size: 0.9rem;
         }
 
-        /* ===== SIMPLIFIED FORM ===== */
-        .booking-section {
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease 1.2s both;
-            padding: 20px;
+        .package-features i {
+            color: #0088ff;
+            font-size: 0.8rem;
         }
 
-        .booking-container {
-            background: rgba(20, 20, 30, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 50px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0088ff;
         }
 
-        .booking-container h3 {
-            font-size: 2.5rem;
-            font-family: 'Syne', sans-serif;
+        .package-price span {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        /* ===== OTT GRID ===== */
+        .ott-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 40px;
+        }
+
+        .ott-box {
+            background: rgba(18, 18, 22, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 16px;
             text-align: center;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.2s ease;
+            cursor: pointer;
         }
 
-        .simple-form {
-            max-width: 600px;
-            margin: 0 auto;
+        .ott-box:active {
+            background: rgba(0, 136, 255, 0.05);
         }
 
-        .form-row {
-            margin-bottom: 25px;
+        .ott-box i {
+            font-size: 1.6rem;
+            color: #0088ff;
+            margin-bottom: 10px;
         }
 
-        .form-row input,
-        .form-row textarea {
-            width: 100%;
-            padding: 18px 25px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(0, 255, 255, 0.2);
-            border-radius: 50px;
+        .ott-box h4 {
             font-size: 1rem;
-            color: #fff;
-            transition: all 0.3s ease;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
-        .form-row textarea {
-            border-radius: 30px;
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row input:focus,
-        .form-row textarea:focus {
-            outline: none;
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .form-row input::placeholder,
-        .form-row textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-            font-style: italic;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border: none;
-            border-radius: 50px;
+        .ott-price {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #0a0a0f;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #0088ff;
+            margin: 6px 0 2px;
         }
 
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        .ott-channel {
+            color: #888;
+            font-size: 0.75rem;
         }
 
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
-        }
-
-        /* ===== PLAN DETAILS SECTION (HIDDEN INITIALLY) ===== */
+        /* ===== PLAN DETAILS SECTION ===== */
         .plan-details-section {
             display: none;
-            animation: fadeIn 0.5s ease;
-            margin-bottom: 60px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            margin-bottom: 40px;
         }
 
         .plan-details-header {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .back-btn {
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
-            color: #00ffff;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
         }
 
-        .back-btn:hover {
-            background: #00ffff;
-            color: #0a0a0f;
-            transform: scale(1.1);
+        .back-btn:active {
+            background: #0088ff;
+            color: #0a0a0c;
         }
 
         .plan-details-header h2 {
-            font-size: 2.5rem;
-            font-family: 'Syne', sans-serif;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            font-weight: 700;
         }
 
         .plans-grid-detailed {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
 
         .detailed-plan-card {
-            background: rgba(20, 20, 30, 0.5);
+            background: rgba(18, 18, 22, 0.6);
             backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 40px 30px;
-            border: 2px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.4s ease;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: border-color 0.2s ease;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
 
-        .detailed-plan-card:hover {
-            transform: translateY(-15px);
-            border-color: #ff00ff;
-            box-shadow: 0 20px 40px rgba(255, 0, 255, 0.2);
+        .detailed-plan-card:active {
+            border-color: #0088ff;
         }
 
         .plan-badge {
             position: absolute;
-            top: 20px;
-            right: -30px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            color: #0a0a0f;
-            padding: 8px 40px;
-            transform: rotate(45deg);
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 136, 255, 0.1);
+            color: #0088ff;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
         }
 
         .detailed-plan-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
         }
 
         .plan-speed {
-            font-size: 1.2rem;
-            color: #00ffff;
-            margin-bottom: 20px;
+            color: #0088ff;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
         }
 
         .plan-price-detailed {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0088ff;
+            margin-bottom: 16px;
         }
 
         .plan-features-list {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .plan-features-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
         }
 
         .plan-features-list i {
-            color: #00ffff;
-            font-size: 1.2rem;
+            color: #0088ff;
+            font-size: 0.8rem;
         }
 
         .select-plan-btn {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: transparent;
-            border: 2px solid #00ffff;
-            border-radius: 50px;
-            color: #00ffff;
-            font-weight: 700;
-            font-size: 1.1rem;
+            border: 1px solid #0088ff;
+            border-radius: 30px;
+            color: #0088ff;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
         }
 
-        .select-plan-btn:hover {
-            background: #00ffff;
-            color: #0a0a0f;
+        .select-plan-btn:active {
+            background: #0088ff;
+            color: #0a0a0c;
+        }
+
+        /* ===== BOOKING FORM ===== */
+        .booking-section {
+            margin-bottom: 40px;
+        }
+
+        .booking-container {
+            background: rgba(18, 18, 22, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 28px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .booking-container h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .simple-form {
+            width: 100%;
+        }
+
+        .form-row {
+            margin-bottom: 16px;
+        }
+
+        .form-row input,
+        .form-row textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: #fff;
+            transition: border-color 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-row textarea {
+            border-radius: 20px;
+            min-height: 80px;
+        }
+
+        .form-row input:focus,
+        .form-row textarea:focus {
+            outline: none;
+            border-color: #0088ff;
+        }
+
+        .form-row input::placeholder,
+        .form-row textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #0088ff;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0a0a0c;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn:active {
+            opacity: 0.8;
         }
 
         /* ===== SUCCESS MESSAGE ===== */
         .success-message {
             text-align: center;
-            padding: 60px;
-            background: rgba(20, 20, 30, 0.5);
+            padding: 40px 20px;
+            background: rgba(18, 18, 22, 0.8);
             backdrop-filter: blur(10px);
-            border-radius: 50px;
-            border: 2px solid #00ffff;
-            animation: fadeIn 0.5s ease;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 136, 255, 0.2);
             display: none;
         }
 
         .success-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            width: 64px;
+            height: 64px;
+            background: #0088ff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 3rem;
-            color: #0a0a0f;
-            animation: pulseSuccess 2s infinite;
-        }
-
-        @keyframes pulseSuccess {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
-            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(255, 0, 255, 0.5); }
+            margin: 0 auto 24px;
+            font-size: 2rem;
+            color: #0a0a0c;
         }
 
         .success-message h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
         }
 
         .success-message p {
             color: #aaa;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
         }
 
         .new-booking-btn {
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0a0a0f;
+            padding: 12px 32px;
+            background: transparent;
+            border: 1px solid #0088ff;
+            border-radius: 30px;
+            color: #0088ff;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
         }
 
-        .new-booking-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+        .new-booking-btn:active {
+            background: #0088ff;
+            color: #0a0a0c;
         }
 
         /* ===== FOOTER ===== */
         footer {
-            margin-top: 80px;
-            padding: 40px 20px;
+            margin-top: 40px;
+            padding: 24px 16px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            position: relative;
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .developer-credit {
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 50px;
-            display: inline-block;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .developer-credit .code-bracket {
-            color: #ff00ff;
-            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            color: #666;
         }
 
         .developer-credit .name {
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: #888;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #00ffff;
+            color: #0088ff;
+            font-weight: 600;
         }
 
         .copyright {
-            color: #666;
-            font-size: 0.9rem;
+            color: #444;
+            font-size: 0.8rem;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .package-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* ===== NOTIFICATIONS ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            left: 20px;
+            background: #0088ff;
+            color: #0a0a0c;
+            padding: 14px 18px;
+            border-radius: 30px;
+            z-index: 10000;
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        @media (min-width: 480px) {
             .ott-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 640px) {
+            .package-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .plans-grid-detailed {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
             .hero {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
             }
+            
             .hero-content h2 {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
-            .hero-stats {
-                justify-content: center;
-            }
-            .package-cards {
-                grid-template-columns: 1fr;
-            }
+            
             .ott-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(4, 1fr);
             }
-            .side-menu {
-                width: 100%;
-                right: -100%;
+            
+            .notification {
+                left: auto;
+                right: 20px;
+                min-width: 300px;
             }
-            .booking-container {
-                padding: 30px 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .package-cards {
+                grid-template-columns: repeat(3, 1fr);
             }
+            
+            .plans-grid-detailed {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <!-- Floating Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loader"></div>
             <h2>NEXUS</h2>
-            <p>CONNECTING THE FUTURE</p>
         </div>
     </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
     <!-- Main Container -->
     <div class="container" id="mainContainer">
@@ -1115,21 +868,21 @@
                 </div>
             </div>
             <div class="menu-items">
-                <div class="menu-item" onclick="showPlanDetails('data')">
+                <div class="menu-item" onclick="showPlans('data')">
                     <i class="fas fa-tachometer-alt"></i>
-                    <span>Data Packages</span>
+                    <span>Data Plans</span>
                 </div>
-                <div class="menu-item" onclick="showPlanDetails('iptv')">
+                <div class="menu-item" onclick="showPlans('iptv')">
                     <i class="fas fa-tv"></i>
                     <span>IPTV Plans</span>
                 </div>
-                <div class="menu-item" onclick="showPlanDetails('ott')">
+                <div class="menu-item" onclick="showPlans('ott')">
                     <i class="fas fa-film"></i>
                     <span>OTT Bundles</span>
                 </div>
-                <div class="menu-item" onclick="showPlanDetails('support')">
+                <div class="menu-item" onclick="showPlans('support')">
                     <i class="fas fa-headset"></i>
-                    <span>24/7 Support</span>
+                    <span>Support</span>
                 </div>
             </div>
         </div>
@@ -1138,149 +891,131 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h2 class="glitch-text">Future of<br>Connectivity</h2>
-                <p>Experience lightning-fast internet with our cutting-edge fiber optic technology. Unlimited data, zero buffering, and 24/7 premium support.</p>
+                <h2>Lightning Fast<br>Internet</h2>
+                <p>Experience seamless connectivity with our premium fiber optic broadband.</p>
                 <div class="hero-stats">
                     <div class="stat">
                         <div class="stat-number">10K+</div>
-                        <div class="stat-label">Happy Customers</div>
+                        <div class="stat-label">Happy Users</div>
                     </div>
                     <div class="stat">
                         <div class="stat-number">1Gbps</div>
                         <div class="stat-label">Max Speed</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">99.9%</div>
-                        <div class="stat-label">Uptime</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-3d">
-                <div class="floating-cube"></div>
-            </div>
-        </section>
-
-        <!-- Packages Showcase (Clickable Boxes) -->
-        <section class="packages-showcase">
-            <div class="section-title">
-                <h2>Choose Your Power</h2>
-                <p>Select a package to view all plans</p>
-            </div>
-            <div class="package-cards">
-                <div class="package-card" onclick="showPlanDetails('data')">
-                    <div class="package-icon">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
-                    <h3>Data Plans</h3>
-                    <p>High-speed internet for every need</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> 20 Mbps to 1 Gbps</li>
-                        <li><i class="fas fa-check-circle"></i> Unlimited Data</li>
-                        <li><i class="fas fa-check-circle"></i> Free Installation</li>
-                    </ul>
-                    <div class="package-price">299<span>/mo</span></div>
-                </div>
-                <div class="package-card" onclick="showPlanDetails('iptv')">
-                    <div class="package-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <h3>IPTV Plans</h3>
-                    <p>700+ HD channels in your language</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> Hindi, English, Regional</li>
-                        <li><i class="fas fa-check-circle"></i> Sports & Movies</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <div class="package-price">199<span>/mo</span></div>
-                </div>
-                <div class="package-card" onclick="showPlanDetails('ott')">
-                    <div class="package-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>OTT Bundles</h3>
-                    <p>All premium streaming apps in one</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> 15+ OTT Platforms</li>
-                        <li><i class="fas fa-check-circle"></i> Netflix, Prime, Hotstar</li>
-                        <li><i class="fas fa-check-circle"></i> Family Sharing</li>
-                    </ul>
-                    <div class="package-price">399<span>/mo</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- IPTV/OTT Boxes Showcase -->
-        <section class="ott-showcase">
-            <div class="section-title">
-                <h2>Entertainment Unlimited</h2>
-                <p>Premium IPTV & OTT bundles</p>
-            </div>
-            <div class="ott-grid">
-                <div class="ott-box" onclick="showPlanDetails('hindi')">
-                    <i class="fas fa-language"></i>
-                    <h4>Hindi IPTV</h4>
-                    <div class="ott-price">₹199</div>
-                    <div class="ott-channel">720+ Channels</div>
+        <!-- Package Cards -->
+        <section class="package-cards">
+            <div class="package-card" onclick="showPlans('data')">
+                <div class="package-icon">
+                    <i class="fas fa-tachometer-alt"></i>
                 </div>
-                <div class="ott-box" onclick="showPlanDetails('english')">
+                <h3>Data Plans</h3>
+                <p>High-speed internet for home & business</p>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> 20 Mbps to 1 Gbps</li>
+                    <li><i class="fas fa-check"></i> Unlimited Data</li>
+                </ul>
+                <div class="package-price">299<span>/mo</span></div>
+            </div>
+            <div class="package-card" onclick="showPlans('iptv')">
+                <div class="package-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h3>IPTV Plans</h3>
+                <p>700+ HD channels in your language</p>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Hindi, English, Regional</li>
+                    <li><i class="fas fa-check"></i> Sports & Movies</li>
+                </ul>
+                <div class="package-price">199<span>/mo</span></div>
+            </div>
+            <div class="package-card" onclick="showPlans('ott')">
+                <div class="package-icon">
                     <i class="fas fa-film"></i>
-                    <h4>English IPTV</h4>
-                    <div class="ott-price">₹249</div>
-                    <div class="ott-channel">500+ Channels</div>
                 </div>
-                <div class="ott-box" onclick="showPlanDetails('sports')">
-                    <i class="fas fa-futbol"></i>
-                    <h4>Sports Pack</h4>
-                    <div class="ott-price">₹299</div>
-                    <div class="ott-channel">All Sports Channels</div>
-                </div>
-                <div class="ott-box" onclick="showPlanDetails('mega')">
-                    <i class="fas fa-crown"></i>
-                    <h4>Mega OTT</h4>
-                    <div class="ott-price">₹499</div>
-                    <div class="ott-channel">15+ OTT Apps</div>
-                </div>
+                <h3>OTT Bundles</h3>
+                <p>15+ premium streaming apps</p>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Netflix, Prime, Hotstar</li>
+                    <li><i class="fas fa-check"></i> Family Sharing</li>
+                </ul>
+                <div class="package-price">399<span>/mo</span></div>
             </div>
         </section>
 
-        <!-- Plan Details Section (Shown when clicking on packages) -->
+        <!-- OTT Showcase -->
+        <div class="section-title">
+            <h2>Popular Bundles</h2>
+            <p>Most loved entertainment packs</p>
+        </div>
+        <section class="ott-grid">
+            <div class="ott-box" onclick="showPlans('hindi')">
+                <i class="fas fa-language"></i>
+                <h4>Hindi IPTV</h4>
+                <div class="ott-price">₹199</div>
+                <div class="ott-channel">720+ Channels</div>
+            </div>
+            <div class="ott-box" onclick="showPlans('english')">
+                <i class="fas fa-film"></i>
+                <h4>English IPTV</h4>
+                <div class="ott-price">₹249</div>
+                <div class="ott-channel">500+ Channels</div>
+            </div>
+            <div class="ott-box" onclick="showPlans('sports')">
+                <i class="fas fa-futbol"></i>
+                <h4>Sports Pack</h4>
+                <div class="ott-price">₹299</div>
+                <div class="ott-channel">All Sports</div>
+            </div>
+            <div class="ott-box" onclick="showPlans('mega')">
+                <i class="fas fa-crown"></i>
+                <h4>Mega OTT</h4>
+                <div class="ott-price">₹499</div>
+                <div class="ott-channel">15+ Apps</div>
+            </div>
+        </section>
+
+        <!-- Plan Details Section -->
         <div class="plan-details-section" id="planDetailsSection">
             <div class="plan-details-header">
-                <div class="back-btn" onclick="hidePlanDetails()">
+                <div class="back-btn" onclick="hidePlans()">
                     <i class="fas fa-arrow-left"></i>
                 </div>
-                <h2 id="planDetailsTitle">Data Plans</h2>
+                <h2 id="planTitle">Data Plans</h2>
             </div>
-            <div class="plans-grid-detailed" id="plansGridDetailed">
-                <!-- Dynamically populated by JavaScript -->
+            <div class="plans-grid-detailed" id="plansGrid">
+                <!-- JS will populate -->
             </div>
         </div>
 
-        <!-- Simplified Booking Form -->
+        <!-- Booking Form -->
         <section class="booking-section" id="bookingSection">
             <div class="booking-container">
-                <h3>⚡ Quick Connection Booking</h3>
+                <h3>Book Connection</h3>
                 <form class="simple-form" id="bookingForm" onsubmit="return false;">
                     <div class="form-row">
-                        <input type="text" id="customerName" placeholder="Your Full Name *" required>
+                        <input type="text" id="customerName" placeholder="Full Name *" required>
                     </div>
                     <div class="form-row">
                         <input type="tel" id="phoneNumber" placeholder="Mobile Number *" required maxlength="10">
                     </div>
                     <div class="form-row">
-                        <input type="email" id="email" placeholder="Email Address">
+                        <input type="email" id="email" placeholder="Email (Optional)">
                     </div>
                     <div class="form-row">
                         <input type="text" id="area" placeholder="Area / Locality *" required>
                     </div>
                     <div class="form-row">
-                        <textarea id="address" placeholder="Complete Address (House No., Building, Street, Landmark)"></textarea>
+                        <textarea id="address" placeholder="Complete Address (Optional)"></textarea>
                     </div>
                     <div class="form-row">
-                        <input type="text" id="selectedPlan" placeholder="Plan Interested In (Optional)" value="Not selected yet">
+                        <input type="text" id="selectedPlan" placeholder="Selected Plan" readonly value="Not selected">
                     </div>
                     <button type="button" class="submit-btn" onclick="submitBooking()">
-                        BOOK NOW <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-paper-plane"></i> SUBMIT
                     </button>
                 </form>
             </div>
@@ -1291,44 +1026,42 @@
             <div class="success-icon">
                 <i class="fas fa-check"></i>
             </div>
-            <h2>Booking Confirmed!</h2>
-            <p>Our executive will contact you within 2 hours. Thank you for choosing Nexus Broadband.</p>
-            <button class="new-booking-btn" onclick="resetBooking()">New Booking</button>
+            <h2>Thank You!</h2>
+            <p>We'll contact you within 2 hours</p>
+            <button class="new-booking-btn" onclick="resetForm()">New Booking</button>
         </div>
 
-        <!-- Footer with Developer Credit -->
+        <!-- Footer -->
         <footer>
-            <div class="footer-content">
-                <div class="developer-credit">
-                    <span class="code-bracket">{</span>
-                    <span class="name"> Harsh_Labs </span>
-                    <span class="code-bracket">}</span>
-                </div>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Support</a>
-                </div>
-                <div class="copyright">
-                    © 2024 Nexus Broadband | Crafted with <i class="fas fa-heart" style="color: #ff00ff;"></i> by Harsh_Labs
-                </div>
+            <div class="developer-credit">
+                <span class="name">Harsh_Labs</span> | Premium Internet Services
+            </div>
+            <div class="copyright">
+                © 2024 Nexus Broadband
             </div>
         </footer>
     </div>
 
     <script>
+        // ===== CONFIGURATION =====
+        const CONFIG = {
+            TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',  // अपना टोकन डालें
+            TELEGRAM_CHAT_ID: 'YOUR_CHAT_ID_HERE',      // अपना Chat ID डालें
+            GOOGLE_APPS_SCRIPT_URL: 'YOUR_GOOGLE_SCRIPT_URL_HERE'  // Google Apps Script URL डालें
+        };
+
         // ===== GLOBAL VARIABLES =====
-        let selectedPlanType = '';
+        let selectedPlan = 'Not selected';
+        let currentPlans = 'data';
 
         // ===== LOADING SCREEN =====
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
+        window.addEventListener('load', function() {
+            setTimeout(function() {
                 document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(() => {
+                setTimeout(function() {
                     document.getElementById('loadingScreen').style.display = 'none';
-                    document.getElementById('mainContainer').style.opacity = '1';
-                }, 1000);
-            }, 2000);
+                }, 300);
+            }, 500);
         });
 
         // ===== MENU TOGGLE =====
@@ -1337,15 +1070,13 @@
         const menuOverlay = document.getElementById('menuOverlay');
         const closeMenu = document.getElementById('closeMenu');
 
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             this.classList.toggle('active');
             sideMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
             document.body.style.overflow = sideMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
-
-        closeMenu.addEventListener('click', closeMenuFunction);
-        menuOverlay.addEventListener('click', closeMenuFunction);
 
         function closeMenuFunction() {
             menuToggle.classList.remove('active');
@@ -1354,471 +1085,203 @@
             document.body.style.overflow = 'auto';
         }
 
-        // ===== SHOW PLAN DETAILS =====
-        function showPlanDetails(type) {
-            // Close menu if open
+        closeMenu.addEventListener('click', closeMenuFunction);
+        menuOverlay.addEventListener('click', closeMenuFunction);
+
+        // ===== SHOW PLANS =====
+        function showPlans(type) {
             closeMenuFunction();
             
-            // Hide showcase sections
             document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.packages-showcase').style.display = 'none';
-            document.querySelector('.ott-showcase').style.display = 'none';
+            document.querySelector('.package-cards').style.display = 'none';
+            document.querySelector('.ott-grid').style.display = 'none';
+            document.querySelector('.section-title').style.display = 'none';
             
-            // Show plan details section
             const planSection = document.getElementById('planDetailsSection');
             planSection.style.display = 'block';
             
-            // Set title and populate plans
-            const title = document.getElementById('planDetailsTitle');
-            const plansGrid = document.getElementById('plansGridDetailed');
+            currentPlans = type;
+            document.getElementById('planTitle').innerText = getPlanTitle(type);
+            document.getElementById('plansGrid').innerHTML = getPlansHTML(type);
             
-            selectedPlanType = type;
-            
-            if (type === 'data') {
-                title.textContent = '⚡ Data Plans';
-                plansGrid.innerHTML = generateDataPlans();
-            } else if (type === 'iptv') {
-                title.textContent = '📺 IPTV Plans';
-                plansGrid.innerHTML = generateIPTVPlans();
-            } else if (type === 'ott') {
-                title.textContent = '🎬 OTT Bundles';
-                plansGrid.innerHTML = generateOTTPlans();
-            } else if (type === 'hindi') {
-                title.textContent = '🇮🇳 Hindi IPTV';
-                plansGrid.innerHTML = generateHindiIPTV();
-            } else if (type === 'english') {
-                title.textContent = '🇬🇧 English IPTV';
-                plansGrid.innerHTML = generateEnglishIPTV();
-            } else if (type === 'sports') {
-                title.textContent = '⚽ Sports Pack';
-                plansGrid.innerHTML = generateSportsPack();
-            } else if (type === 'mega') {
-                title.textContent = '👑 Mega OTT Bundle';
-                plansGrid.innerHTML = generateMegaOTT();
-            } else {
-                title.textContent = 'Support Center';
-                plansGrid.innerHTML = generateSupport();
-            }
-            
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function hidePlanDetails() {
+        function hidePlans() {
             document.getElementById('planDetailsSection').style.display = 'none';
+            
             document.querySelector('.hero').style.display = 'flex';
-            document.querySelector('.packages-showcase').style.display = 'block';
-            document.querySelector('.ott-showcase').style.display = 'block';
+            document.querySelector('.package-cards').style.display = 'grid';
+            document.querySelector('.ott-grid').style.display = 'grid';
+            document.querySelector('.section-title').style.display = 'block';
         }
 
-        // ===== GENERATE PLANS =====
-        function generateDataPlans() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('30 Mbps - ₹399/month')">
-                    <div class="plan-badge">POPULAR</div>
-                    <h3>STARTER</h3>
-                    <div class="plan-speed">30 Mbps Speed</div>
-                    <div class="plan-price-detailed">₹399</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Unlimited Data (FUP: 3300GB)</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Free WiFi Router</li>
-                        <li><i class="fas fa-check-circle"></i> 24/7 Customer Support</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('30 Mbps - ₹399/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('50 Mbps - ₹499/month')">
-                    <h3>PRO</h3>
-                    <div class="plan-speed">50 Mbps Speed</div>
-                    <div class="plan-price-detailed">₹499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Unlimited Data (FUP: 5000GB)</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Free WiFi Router + Installation</li>
-                        <li><i class="fas fa-check-circle"></i> Priority Support</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('50 Mbps - ₹499/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('100 Mbps - ₹699/month')">
-                    <h3>ULTRA</h3>
-                    <div class="plan-speed">100 Mbps Speed</div>
-                    <div class="plan-price-detailed">₹699</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Unlimited Data (FUP: 7500GB)</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Premium WiFi 6 Router</li>
-                        <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('100 Mbps - ₹699/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('200 Mbps - ₹999/month')">
-                    <div class="plan-badge">BEST VALUE</div>
-                    <h3>GAMER</h3>
-                    <div class="plan-speed">200 Mbps Speed</div>
-                    <div class="plan-price-detailed">₹999</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Unlimited Data (FUP: 10000GB)</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Gaming Router Included</li>
-                        <li><i class="fas fa-check-circle"></i> Dedicated Gaming Support</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('200 Mbps - ₹999/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('500 Mbps - ₹1499/month')">
-                    <h3>BUSINESS</h3>
-                    <div class="plan-speed">500 Mbps Speed</div>
-                    <div class="plan-price-detailed">₹1499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Truly Unlimited Data</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Static IP Included</li>
-                        <li><i class="fas fa-check-circle"></i> 4-Hour Resolution Guarantee</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('500 Mbps - ₹1499/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('1 Gbps - ₹2499/month')">
-                    <h3>ENTERPRISE</h3>
-                    <div class="plan-speed">1 Gbps Speed</div>
-                    <div class="plan-price-detailed">₹2499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Truly Unlimited Data</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                        <li><i class="fas fa-check-circle"></i> Dedicated Fiber Connection</li>
-                        <li><i class="fas fa-check-circle"></i> 2-Hour Resolution Guarantee</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('1 Gbps - ₹2499/month')">SELECT PLAN</button>
-                </div>
-            `;
+        function getPlanTitle(type) {
+            const titles = {
+                'data': '⚡ Data Plans',
+                'iptv': '📺 IPTV Plans',
+                'ott': '🎬 OTT Bundles',
+                'hindi': '🇮🇳 Hindi IPTV',
+                'english': '🇬🇧 English IPTV',
+                'sports': '⚽ Sports Pack',
+                'mega': '👑 Mega OTT',
+                'support': '📞 Support'
+            };
+            return titles[type] || 'Plans';
         }
 
-        function generateIPTVPlans() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('Hindi IPTV - ₹199/month')">
-                    <div class="plan-badge">MOST WATCHED</div>
-                    <h3>HINDI IPTV</h3>
-                    <div class="plan-speed">720+ Channels</div>
-                    <div class="plan-price-detailed">₹199</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All Hindi Entertainment</li>
-                        <li><i class="fas fa-check-circle"></i> News, Movies, Sports</li>
-                        <li><i class="fas fa-check-circle"></i> HD Quality Streaming</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Hindi IPTV - ₹199/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('English IPTV - ₹249/month')">
-                    <h3>ENGLISH IPTV</h3>
-                    <div class="plan-speed">500+ Channels</div>
-                    <div class="plan-price-detailed">₹249</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> International Channels</li>
-                        <li><i class="fas fa-check-circle"></i> HBO, BBC, CNN, etc.</li>
-                        <li><i class="fas fa-check-circle"></i> HD & 4K Content</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('English IPTV - ₹249/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Regional IPTV - ₹199/month')">
-                    <h3>REGIONAL MIX</h3>
-                    <div class="plan-speed">600+ Channels</div>
-                    <div class="plan-price-detailed">₹199</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Tamil, Telugu, Kannada</li>
-                        <li><i class="fas fa-check-circle"></i> Malayalam, Bengali, Marathi</li>
-                        <li><i class="fas fa-check-circle"></i> Local News & Entertainment</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Regional IPTV - ₹199/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Premium IPTV - ₹499/month')">
-                    <div class="plan-badge">ULTIMATE</div>
-                    <h3>PREMIUM IPTV</h3>
-                    <div class="plan-speed">1000+ Channels</div>
-                    <div class="plan-price-detailed">₹499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All Languages Included</li>
-                        <li><i class="fas fa-check-circle"></i> All Sports & Movies</li>
-                        <li><i class="fas fa-check-circle"></i> 4K Streaming Available</li>
-                        <li><i class="fas fa-check-circle"></i> 14 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Premium IPTV - ₹499/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
+        function getPlansHTML(type) {
+            const plans = {
+                'data': [
+                    { name: 'STARTER', speed: '30 Mbps', price: '399', features: ['Unlimited Data (3300GB FUP)', '30 Days Validity', 'Free Router'] },
+                    { name: 'PRO', speed: '50 Mbps', price: '499', features: ['Unlimited Data (5000GB FUP)', '30 Days Validity', 'Free WiFi Router'] },
+                    { name: 'ULTRA', speed: '100 Mbps', price: '699', features: ['Unlimited Data (7500GB FUP)', '30 Days Validity', 'WiFi 6 Router'] },
+                    { name: 'GAMER', speed: '200 Mbps', price: '999', badge: 'BEST VALUE', features: ['Unlimited Data (10TB FUP)', '30 Days Validity', 'Gaming Router'] }
+                ],
+                'iptv': [
+                    { name: 'HINDI BASIC', speed: '600+ Channels', price: '199', features: ['Star Plus, Zee TV, Sony', 'Colors, &TV', 'News Channels'] },
+                    { name: 'ENGLISH', speed: '500+ Channels', price: '249', features: ['HBO, BBC, CNN', 'National Geographic', 'Movies Now'] },
+                    { name: 'PREMIUM', speed: '1000+ Channels', price: '499', badge: 'POPULAR', features: ['All Languages', 'All Sports', '4K Streaming'] }
+                ],
+                'ott': [
+                    { name: 'ENTERTAINMENT', speed: '4 Apps', price: '134', features: ['Discovery+', 'Zee5', 'Sony Liv', 'Playflix'] },
+                    { name: 'PREMIUM', speed: '4 Apps', price: '200', features: ['Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix'] },
+                    { name: 'MEGA OTT', speed: '15+ Apps', price: '399', badge: 'BEST SELLER', features: ['Discovery+', 'Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix', 'Chaupal'] },
+                    { name: 'ULTIMATE', speed: '16+ Apps', price: '258', features: ['Amazon Prime', 'Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix', 'Chaupal', 'Fancode'] }
+                ]
+            };
 
-        function generateOTTPlans() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('Mega OTT Pack - ₹399/month')">
-                    <div class="plan-badge">BEST SELLER</div>
-                    <h3>MEGA OTT PACK</h3>
-                    <div class="plan-speed">15+ Apps</div>
-                    <div class="plan-price-detailed">₹399</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Discovery+, Zee5, Sony Liv</li>
-                        <li><i class="fas fa-check-circle"></i> Jio Hotstar, Playflix, Chaupal</li>
-                        <li><i class="fas fa-check-circle"></i> Fancode, Stage, Runn</li>
-                        <li><i class="fas fa-check-circle"></i> 28 Days Validity</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Mega OTT Pack - ₹399/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Entertainment Pack - ₹134/month')">
-                    <h3>ENTERTAINMENT</h3>
-                    <div class="plan-speed">4 Apps</div>
-                    <div class="plan-price-detailed">₹134</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Discovery+</li>
-                        <li><i class="fas fa-check-circle"></i> Zee5</li>
-                        <li><i class="fas fa-check-circle"></i> Sony Liv</li>
-                        <li><i class="fas fa-check-circle"></i> Playflix</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Entertainment Pack - ₹134/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Premium Pack - ₹200/month')">
-                    <h3>PREMIUM</h3>
-                    <div class="plan-speed">4 Apps</div>
-                    <div class="plan-price-detailed">₹200</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Zee5</li>
-                        <li><i class="fas fa-check-circle"></i> Sony Liv</li>
-                        <li><i class="fas fa-check-circle"></i> Jio Hotstar</li>
-                        <li><i class="fas fa-check-circle"></i> Playflix</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Premium Pack - ₹200/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Ultimate Pack - ₹258/month')">
-                    <div class="plan-badge">MEGA</div>
-                    <h3>ULTIMATE</h3>
-                    <div class="plan-speed">16+ Apps</div>
-                    <div class="plan-price-detailed">₹258</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Amazon Prime, Zee5, Sony Liv</li>
-                        <li><i class="fas fa-check-circle"></i> Jio Hotstar, Playflix, Chaupal</li>
-                        <li><i class="fas fa-check-circle"></i> Fancode, Dangal Play, Friday</li>
-                        <li><i class="fas fa-check-circle"></i> And 7 More Apps</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Ultimate Pack - ₹258/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
-
-        function generateHindiIPTV() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('Hindi IPTV Basic - ₹199/month')">
-                    <div class="plan-badge">POPULAR</div>
-                    <h3>HINDI BASIC</h3>
-                    <div class="plan-speed">600+ Channels</div>
-                    <div class="plan-price-detailed">₹199</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Star Plus, Zee TV, Sony</li>
-                        <li><i class="fas fa-check-circle"></i> Colors, &TV, DD National</li>
-                        <li><i class="fas fa-check-circle"></i> News: Aaj Tak, ABP News</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Hindi IPTV Basic - ₹199/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Hindi IPTV Premium - ₹299/month')">
-                    <h3>HINDI PREMIUM</h3>
-                    <div class="plan-speed">800+ Channels</div>
-                    <div class="plan-price-detailed">₹299</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All Hindi Channels</li>
-                        <li><i class="fas fa-check-circle"></i> Bollywood Movies Channels</li>
-                        <li><i class="fas fa-check-circle"></i> Sports: Star Sports Network</li>
-                        <li><i class="fas fa-check-circle"></i> 14 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Hindi IPTV Premium - ₹299/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Hindi + English Combo - ₹399/month')">
-                    <div class="plan-badge">BEST VALUE</div>
-                    <h3>HINDI + ENGLISH</h3>
-                    <div class="plan-speed">1200+ Channels</div>
-                    <div class="plan-price-detailed">₹399</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All Hindi Channels</li>
-                        <li><i class="fas fa-check-circle"></i> All English Entertainment</li>
-                        <li><i class="fas fa-check-circle"></i> HBO, BBC, CNN included</li>
-                        <li><i class="fas fa-check-circle"></i> 14 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Hindi + English Combo - ₹399/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
-
-        function generateEnglishIPTV() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('English Basic - ₹249/month')">
-                    <h3>ENGLISH BASIC</h3>
-                    <div class="plan-speed">300+ Channels</div>
-                    <div class="plan-price-detailed">₹249</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> HBO, Fox, National Geographic</li>
-                        <li><i class="fas fa-check-circle"></i> BBC, CNN, Discovery</li>
-                        <li><i class="fas fa-check-circle"></i> HD Quality</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('English Basic - ₹249/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('English Premium - ₹399/month')">
-                    <div class="plan-badge">POPULAR</div>
-                    <h3>ENGLISH PREMIUM</h3>
-                    <div class="plan-speed">500+ Channels</div>
-                    <div class="plan-price-detailed">₹399</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All English Entertainment</li>
-                        <li><i class="fas fa-check-circle"></i> 4K Streaming Available</li>
-                        <li><i class="fas fa-check-circle"></i> Sports & Movies Included</li>
-                        <li><i class="fas fa-check-circle"></i> 14 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('English Premium - ₹399/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
-
-        function generateSportsPack() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('Sports Basic - ₹299/month')">
-                    <h3>SPORTS BASIC</h3>
-                    <div class="plan-speed">30+ Sports Channels</div>
-                    <div class="plan-price-detailed">₹299</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Star Sports 1,2,3</li>
-                        <li><i class="fas fa-check-circle"></i> Sony Ten 1,2,3</li>
-                        <li><i class="fas fa-check-circle"></i> Sports18 Network</li>
-                        <li><i class="fas fa-check-circle"></i> 7 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Sports Basic - ₹299/month')">SELECT PLAN</button>
-                </div>
-                <div class="detailed-plan-card" onclick="selectPlan('Sports Premium - ₹499/month')">
-                    <div class="plan-badge">FOR FANS</div>
-                    <h3>SPORTS PREMIUM</h3>
-                    <div class="plan-speed">70+ Sports Channels</div>
-                    <div class="plan-price-detailed">₹499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> All Indian Sports Channels</li>
-                        <li><i class="fas fa-check-circle"></i> International Sports Networks</li>
-                        <li><i class="fas fa-check-circle"></i> Fancode Subscription Included</li>
-                        <li><i class="fas fa-check-circle"></i> 14 Days Free Trial</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Sports Premium - ₹499/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
-
-        function generateMegaOTT() {
-            return `
-                <div class="detailed-plan-card" onclick="selectPlan('Mega OTT - ₹499/month')">
-                    <div class="plan-badge">ULTIMATE</div>
-                    <h3>MEGA OTT</h3>
-                    <div class="plan-speed">15+ Premium Apps</div>
-                    <div class="plan-price-detailed">₹499</div>
-                    <ul class="plan-features-list">
-                        <li><i class="fas fa-check-circle"></i> Amazon Prime Video</li>
-                        <li><i class="fas fa-check-circle"></i> Disney+ Hotstar</li>
-                        <li><i class="fas fa-check-circle"></i> Zee5, Sony Liv, Voot</li>
-                        <li><i class="fas fa-check-circle"></i> Discovery+, Fancode, Chaupal</li>
-                        <li><i class="fas fa-check-circle"></i> And 8 More Apps</li>
-                        <li><i class="fas fa-check-circle"></i> 30 Days Validity</li>
-                    </ul>
-                    <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('Mega OTT - ₹499/month')">SELECT PLAN</button>
-                </div>
-            `;
-        }
-
-        function generateSupport() {
-            return `
-                <div class="detailed-plan-card" style="grid-column: span 2; text-align: center;">
-                    <h3>24/7 CUSTOMER SUPPORT</h3>
-                    <div style="font-size: 4rem; margin: 30px 0; color: #00ffff;">
-                        <i class="fas fa-headset"></i>
+            if (plans[type]) {
+                return plans[type].map(plan => `
+                    <div class="detailed-plan-card" onclick="selectPlan('${plan.name} - ₹${plan.price}/month')">
+                        ${plan.badge ? `<span class="plan-badge">${plan.badge}</span>` : ''}
+                        <h3>${plan.name}</h3>
+                        <div class="plan-speed">${plan.speed}</div>
+                        <div class="plan-price-detailed">₹${plan.price}</div>
+                        <ul class="plan-features-list">
+                            ${plan.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('${plan.name} - ₹${plan.price}/month')">SELECT PLAN</button>
                     </div>
-                    <p style="font-size: 1.5rem; margin-bottom: 20px;">📞 Call: 9516688921</p>
-                    <p style="font-size: 1.5rem; margin-bottom: 20px;">💬 WhatsApp: 8959334650</p>
-                    <p style="font-size: 1.2rem; color: #aaa;">Available 24x7 for your support</p>
-                    <button class="select-plan-btn" style="margin-top: 30px;" onclick="selectPlan('Contact Support')">CONTACT NOW</button>
-                </div>
-            `;
+                `).join('');
+            }
+            
+            return '<div class="detailed-plan-card" style="grid-column: span 3; text-align: center;">Support: 9516688921</div>';
         }
 
         // ===== SELECT PLAN =====
-        function selectPlan(planName) {
-            document.getElementById('selectedPlan').value = planName;
-            
-            // Show booking form with animation
+        function selectPlan(plan) {
+            selectedPlan = plan;
+            document.getElementById('selectedPlan').value = plan;
+            hidePlans();
             document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
-            
-            // Highlight the selected plan input
-            document.getElementById('selectedPlan').style.borderColor = '#ff00ff';
-            setTimeout(() => {
-                document.getElementById('selectedPlan').style.borderColor = '';
-            }, 1000);
-            
-            // Show info message
-            showInfo(`✅ Plan selected: ${planName}`);
+            showNotification('✅ Plan selected: ' + plan);
         }
 
         // ===== SUBMIT BOOKING =====
-        function submitBooking() {
-            const name = document.getElementById('customerName').value;
-            const phone = document.getElementById('phoneNumber').value;
-            const area = document.getElementById('area').value;
+        async function submitBooking() {
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const area = document.getElementById('area').value.trim();
+            const address = document.getElementById('address').value.trim();
             const plan = document.getElementById('selectedPlan').value;
-            
-            // Validation
-            if (!name.trim()) {
-                showError('Please enter your name');
-                return;
-            }
-            if (!phone.trim() || phone.length !== 10 || !/^\d+$/.test(phone)) {
-                showError('Please enter valid 10-digit mobile number');
-                return;
-            }
-            if (!area.trim()) {
-                showError('Please enter your area/locality');
-                return;
-            }
-            
-            // Prepare data for submission (you can integrate with Google Sheets later)
+
+            if (!name) { showNotification('❌ Please enter your name'); return; }
+            if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) { showNotification('❌ Enter valid 10-digit number'); return; }
+            if (!area) { showNotification('❌ Please enter your area'); return; }
+
             const bookingData = {
-                name: name,
-                phone: phone,
-                email: document.getElementById('email').value,
-                area: area,
-                address: document.getElementById('address').value,
-                plan: plan,
-                timestamp: new Date().toISOString()
+                name, phone, email, area, address, plan,
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             };
-            
-            console.log('Booking submitted:', bookingData);
-            
-            // Save to local storage as backup
+
+            showNotification('📤 Submitting...');
+
+            // 1. Save to Google Sheets
+            try {
+                await saveToGoogleSheets(bookingData);
+            } catch (e) {
+                console.log('Google Sheets error:', e);
+            }
+
+            // 2. Send to Telegram
+            try {
+                await sendToTelegram(bookingData);
+            } catch (e) {
+                console.log('Telegram error:', e);
+            }
+
+            // 3. Save locally
             saveToLocalStorage(bookingData);
-            
-            // Show success message
+
+            // Show success
             document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.packages-showcase').style.display = 'none';
-            document.querySelector('.ott-showcase').style.display = 'none';
+            document.querySelector('.package-cards').style.display = 'none';
+            document.querySelector('.ott-grid').style.display = 'none';
+            document.querySelector('.section-title').style.display = 'none';
             document.getElementById('planDetailsSection').style.display = 'none';
             document.getElementById('bookingSection').style.display = 'none';
             document.getElementById('successMessage').style.display = 'block';
             
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            showNotification('✅ Booking submitted successfully!');
         }
 
-        function resetBooking() {
-            // Reset form
-            document.getElementById('bookingForm').reset();
-            document.getElementById('selectedPlan').value = 'Not selected yet';
-            
-            // Show all sections again
-            document.querySelector('.hero').style.display = 'flex';
-            document.querySelector('.packages-showcase').style.display = 'block';
-            document.querySelector('.ott-showcase').style.display = 'block';
-            document.getElementById('bookingSection').style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // ===== GOOGLE SHEETS =====
+        async function saveToGoogleSheets(data) {
+            if (CONFIG.GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                console.log('Google Sheets not configured');
+                return;
+            }
+
+            try {
+                const response = await fetch(CONFIG.GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                console.log('Data sent to Google Sheets');
+            } catch (error) {
+                console.error('Google Sheets error:', error);
+            }
+        }
+
+        // ===== TELEGRAM BOT =====
+        async function sendToTelegram(data) {
+            if (CONFIG.TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
+                console.log('Telegram not configured');
+                return;
+            }
+
+            const message = `
+🔔 *New Booking Alert* 🔔
+────────────────
+👤 *Name:* ${data.name}
+📞 *Phone:* ${data.phone}
+📧 *Email:* ${data.email || 'Not provided'}
+📍 *Area:* ${data.area}
+🏠 *Address:* ${data.address || 'Not provided'}
+📦 *Plan:* ${data.plan}
+⏰ *Time:* ${data.timestamp}
+────────────────
+            `;
+
+            try {
+                const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`;
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                console.log('Message sent to Telegram');
+            } catch (error) {
+                console.error('Telegram error:', error);
+            }
         }
 
         // ===== LOCAL STORAGE =====
@@ -1833,73 +1296,45 @@
             }
         }
 
-        // ===== NOTIFICATION FUNCTIONS =====
-        function showError(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #ff0055;
-                color: white;
-                padding: 15px 25px;
-                border-radius: 50px;
-                z-index: 10000;
-                animation: slideInRight 0.3s ease;
-                box-shadow: 0 5px 20px rgba(255, 0, 85, 0.3);
-                border: 1px solid #00ffff;
-            `;
-            notification.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-            document.body.appendChild(notification);
+        // ===== RESET FORM =====
+        function resetForm() {
+            document.getElementById('bookingForm').reset();
+            document.getElementById('selectedPlan').value = 'Not selected';
+            selectedPlan = 'Not selected';
+            
+            document.querySelector('.hero').style.display = 'flex';
+            document.querySelector('.package-cards').style.display = 'grid';
+            document.querySelector('.ott-grid').style.display = 'grid';
+            document.querySelector('.section-title').style.display = 'block';
+            document.getElementById('bookingSection').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ===== NOTIFICATION =====
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
             
             setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
+                notification.classList.remove('show');
             }, 3000);
         }
 
-        function showInfo(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #00ffff;
-                color: #0a0a0f;
-                padding: 15px 25px;
-                border-radius: 50px;
-                z-index: 10000;
-                animation: slideInRight 0.3s ease;
-                box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
-                border: 1px solid #ff00ff;
-                font-weight: 600;
-            `;
-            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-
-        // Add animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from { transform: translateX(100px); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOutRight {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100px); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Phone number validation
+        // ===== PHONE VALIDATION =====
         document.getElementById('phoneNumber').addEventListener('input', function(e) {
             this.value = this.value.replace(/\D/g, '').slice(0, 10);
+        });
+
+        // ===== AUTO-SELECT PLAN FROM URL (Optional) =====
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const planParam = urlParams.get('plan');
+            if (planParam) {
+                selectPlan(decodeURIComponent(planParam));
+            }
         });
     </script>
 </body>
