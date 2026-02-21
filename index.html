@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionStream | Premium IPTV & OTT Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0B0B0F;
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1A1A1F;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0066FF;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E10600;
+        }
+
+        /* Layer 2 - Tech Glow Animation */
+        .glow-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, rgba(0,102,255,0) 70%);
+            animation: floatGlow 12s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, 5%) rotate(2deg); }
+            66% { transform: translate(-5%, -5%) rotate(-2deg); }
+        }
+
+        /* Layer 3 - Energy Accent Line */
+        .energy-line {
+            position: relative;
+        }
+
+        .energy-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #E10600;
+            animation: pulseLine 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseLine {
+            0%, 100% { opacity: 1; transform: scaleX(1); }
+            50% { opacity: 0.5; transform: scaleX(0.95); }
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #0B0B0F;
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #E10600;
+            animation: slideLine 3s ease-in-out infinite;
+        }
+
+        @keyframes slideLine {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #D4AF37;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a.active {
+            color: #D4AF37;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #D4AF37;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 80px;
+            position: relative;
+            background-color: #0B0B0F;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #B0B0B0;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 5%;
+            background-color: #0B0B0F;
+            position: relative;
+        }
+
+        .section-alternate {
+            background-color: #1A1A1F;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: #B0B0B0;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Plans Grid */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background-color: #1A1A1F;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            border-color: #D4AF37;
+        }
+
+        .plan-card.premium {
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .plan-card.premium::before {
+            content: 'BEST SELLER';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #D4AF37;
+            color: #0B0B0F;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #B0B0B0;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features li {
+            color: #B0B0B0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: #0066FF;
+            font-weight: 700;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background-color: #0B0B0F;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #0066FF;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-item h3 {
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-item p {
+            color: #B0B0B0;
+            font-size: 0.95rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #1A1A1F;
+            border-radius: 30px;
+            padding: 3rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 33.33%;
+            height: 100%;
+            background: #E10600;
+            border-radius: 2px;
+            animation: progressPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step.active .step-number {
+            background: #E10600;
+            color: #FFFFFF;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            color: #FFFFFF;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .step-label {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+        }
+
+        .step.active .step-label {
+            color: #D4AF37;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: #0B0B0F;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0066FF;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #0B0B0F;
+            border: 2px solid #D4AF37;
+            color: #FFFFFF;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #0066FF;
+            border-color: #D4AF37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-primary:active {
+            box-shadow: inset 0 0 20px #E10600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0B0B0F;
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: #B0B0B0;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #B0B0B0;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #0066FF;
+            transform: translateY(-3px);
+        }
+
+        .footer-divider {
+            height: 2px;
+            background: #D4AF37;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #B0B0B0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+            
+            .section {
+                padding: 4rem 5%;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Icons (using emoji as placeholders) */
+        .icon-placeholder {
+            font-size: 2rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">FUSION<span style="color: #D4AF37;">STREAM</span></a>
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#plans">Plans</a>
+                <a href="#services">Services</a>
+                <a href="#book">Book Connection</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Glow -->
+    <section class="hero glow-bg">
+        <div class="hero-content">
+            <h1>Experience Premium<br>IPTV & OTT Services</h1>
+            <p class="tagline">Lightning fast streaming • 1000+ channels • 24/7 support</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section section-alternate">
+        <h2 class="section-title">Our Premium Services</h2>
+        <p class="section-subtitle">Experience entertainment like never before</p>
+        
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">📺</div>
+                <h3>Live IPTV</h3>
+                <p>1000+ live channels from around the world in HD & 4K quality</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🎬</div>
+                <h3>OTT Platforms</h3>
+                <p>Netflix, Prime Video, Disney+ Hotstar & more premium apps</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">⚡</div>
+                <h3>Instant Activation</h3>
+                <p>Get connected within 2 hours of booking</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🛡️</div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock technical assistance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section id="plans" class="section">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <p class="section-subtitle">Flexible plans to match your entertainment needs</p>
+        
+        <div class="plans-grid">
+            <div class="plan-card">
+                <h3 class="plan-name">Basic</h3>
+                <div class="plan-price">₹499<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>100+ Live TV Channels</li>
+                    <li>5 OTT Apps</li>
+                    <li>1 Connection</li>
+                    <li>SD Quality</li>
+                </ul>
+            </div>
+            
+            <div class="plan-card premium">
+                <h3 class="plan-name">Premium</h3>
+                <div class="plan-price">₹999<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>500+ Live TV Channels</li>
+                    <li>All OTT Apps</li>
+                    <li>2 Connections</li>
+                    <li>HD & 4K Quality</li>
+                    <li>24/7 Priority Support</li>
+                </ul>
+            </div>
+            
+            <div class="plan-card">
+                <h3 class="plan-name">Family</h3>
+                <div class="plan-price">₹1499<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>1000+ Live TV Channels</li>
+                    <li>All OTT Apps</li>
+                    <li>4 Connections</li>
+                    <li>4K Ultra HD</li>
+                    <li>24/7 Priority Support</li>
+                    <li>Cloud DVR 100hrs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Connection Form Section -->
+    <section id="book" class="section form-section glow-bg">
+        <div class="form-container">
+            <h2 style="color: #FFFFFF; margin-bottom: 1rem; text-align: center;">Book Your Connection</h2>
+            <p style="color: #B0B0B0; text-align: center; margin-bottom: 2rem;">Get premium IPTV & OTT services at your doorstep</p>
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Personal</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Plan</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Confirm</div>
+                </div>
+            </div>
+            
+            <!-- Form -->
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="tel" class="form-control" id="contact" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address (Optional)</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="plan">Select Plan</label>
+                    <select class="form-control" id="plan" required>
+                        <option value="">Choose a plan</option>
+                        <option value="basic">Basic Plan - ₹499/month</option>
+                        <option value="premium">Premium Plan - ₹999/month</option>
+                        <option value="family">Family Plan - ₹1499/month</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Installation Address</label>
+                    <textarea class="form-control" id="address" rows="3" placeholder="Enter your full address" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Book Your Connection Now</button>
+            </form>
+            
+            <p style="color: #B0B0B0; font-size: 0.8rem; text-align: center; margin-top: 1.5rem;">
+                *We'll contact you within 2 hours for confirmation
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FusionStream</h3>
+                <p>Premium IPTV & OTT Services</p>
+                <p>Experience entertainment without limits</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color: #B0B0B0; text-decoration: none;">About Us</a></p>
+                <p><a href="#" style="color: #B0B0B0; text-decoration: none;">Plans</a></p>
+                <p><a href="#" style="color: #B0B0B0; text-decoration: none;">Contact</a></p>
+                <p><a href="#" style="color: #B0B0B0; text-decoration: none;">Terms</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>📞 +91 98765 43210</p>
+                <p>✉️ support@fusionstream.com</p>
+                <p>📍 Mumbai, India</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                    <a href="#">▶️</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 FusionStream. All rights reserved. Premium IPTV & OTT Services.</p>
+        </div>
+    </footer>
+
+    <!-- Form Submission Script -->
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                contact: document.getElementById('contact').value,
+                email: document.getElementById('email').value,
+                plan: document.getElementById('plan').value,
+                address: document.getElementById('address').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Validate form
+            if (!formData.fullName || !formData.contact || !formData.plan || !formData.address) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Phone number validation (Indian format)
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(formData.contact)) {
+                alert('Please enter a valid Indian mobile number');
+                return;
+            }
+            
+            // Show success message (temporary - will be replaced with actual API call)
+            alert('Booking submitted successfully! We will contact you soon.');
+            
+            // Clear form
+            this.reset();
+            
+            // Here you can add the API call to your backend
+            // For Google Sheets and Telegram bot integration, you'll need:
+            /*
+            fetch('YOUR_BACKEND_URL', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Booking confirmed! Check your WhatsApp for details.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Something went wrong. Please try again.');
+            });
+            */
+        });
+    </script>
+</body>
+</html>
