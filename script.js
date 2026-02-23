@@ -1,5 +1,6 @@
+
 /**
- * S.S. Broadband Customer UI - Logic with Bot Integration + Complaint System
+ * S.S. Broadband Customer UI - Logic with Bot Integration
  */
 
 // User's specifically requested IDs and APIs
@@ -44,20 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bookingForm) {
         bookingForm.addEventListener('submit', handleFormSubmit);
     }
-
-    // NEW: Complaint Form submission
-    const complaintForm = document.getElementById('complaintForm');
-    if (complaintForm) {
-        complaintForm.addEventListener('submit', handleComplaintSubmit);
-    }
-
-    // Close modal when clicking outside
-    const modal = document.getElementById('complaintModal');
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeComplaintForm();
-        }
-    });
 });
 
 // Menu close helper
@@ -153,99 +140,7 @@ function selectPlan(planDetails, price, btnElement) {
     scrollToSection('booking');
 }
 
-// NEW: Open Complaint Form
-function openComplaintForm() {
-    const modal = document.getElementById('complaintModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-}
-
-// NEW: Close Complaint Form
-function closeComplaintForm() {
-    const modal = document.getElementById('complaintModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-    }
-}
-
-// NEW: Handle Complaint Submission
-async function handleComplaintSubmit(e) {
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('complaintSubmitBtn');
-    const statusMsg = document.getElementById('complaintStatusMessage');
-    
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-    submitBtn.disabled = true;
-    statusMsg.className = 'status-msg';
-
-    const customerName = document.getElementById('complaintName').value;
-    const phoneNumber = document.getElementById('complaintPhone').value;
-    const address = document.getElementById('complaintAddress').value;
-    const complaintType = document.getElementById('complaintType').value;
-    const description = document.getElementById('complaintDescription').value;
-    const date = new Date().toLocaleString();
-
-    // Format complaint type display
-    let complaintTypeDisplay = complaintType || 'Not specified';
-    
-    // Prepare Telegram Message - Different format for complaints
-    const telegramMessage = `
-⚠️ **NEW COMPLAINT REGISTRATION** ⚠️
-
-👤 **Name:** ${customerName}
-📞 **Phone:** ${phoneNumber}
-📍 **Address:** ${address}
-🔧 **Issue Type:** ${complaintTypeDisplay}
-📝 **Description:** ${description || 'No description provided'}
-⏱️ **Time:** ${date}
-    `;
-
-    const telegramURL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-    try {
-        // Post to Telegram
-        const response = await fetch(telegramURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: telegramMessage,
-                parse_mode: 'Markdown'
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Telegram API error');
-        }
-
-        // Success state
-        statusMsg.className = 'status-msg success';
-        statusMsg.innerHTML = '<i class="fas fa-check-circle"></i> Complaint registered! We will contact you shortly.';
-
-        // Clear form
-        e.target.reset();
-
-        // Close modal after 2 seconds
-        setTimeout(() => {
-            closeComplaintForm();
-        }, 2000);
-
-    } catch (error) {
-        console.error(error);
-        statusMsg.className = 'status-msg error';
-        statusMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Network error. Please try calling us at 8959334650 instead.';
-    } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }
-}
-
-// Booking Form Submit Handler (Existing)
+// Form Submit Handler
 async function handleFormSubmit(e) {
     e.preventDefault();
 
