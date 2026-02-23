@@ -67,6 +67,14 @@ a {
     gap: 30px;
 }
 
+.mt-4 {
+    margin-top: 24px;
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
 /* Typography */
 h1,
 h2,
@@ -85,6 +93,9 @@ p.section-desc {
     color: var(--text-light);
     font-size: 1.1rem;
     margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Buttons */
@@ -312,6 +323,11 @@ p.section-desc {
     margin-top: 8px;
 }
 
+.support-number.secondary {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
 /* Minimal Hero */
 .hero {
     min-height: 100vh;
@@ -356,7 +372,7 @@ p.section-desc {
     margin-right: auto;
 }
 
-/* Abstract Background Shapes */
+/* Abstract Background Shapes & Custom Icons */
 .hero-graphic {
     position: absolute;
     top: 0;
@@ -389,6 +405,47 @@ p.section-desc {
     /* Warm accent */
     bottom: -100px;
     left: -100px;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 8rem;
+    color: var(--border);
+    opacity: 0.6;
+    animation: floatingIcon 8s ease-in-out infinite;
+}
+
+.icon-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.icon-2 {
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.icon-3 {
+    top: 40%;
+    right: 5%;
+    font-size: 5rem;
+    animation-delay: 4s;
+}
+
+@keyframes floatingIcon {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0);
+    }
 }
 
 /* Services */
@@ -477,6 +534,11 @@ p.section-desc {
     margin: 0 auto;
 }
 
+.ott-grid {
+    max-width: 1200px;
+    /* Wider for more apps */
+}
+
 .plan-card {
     text-align: center;
     position: relative;
@@ -500,6 +562,7 @@ p.section-desc {
     border-radius: 100px;
     font-size: 0.8rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .plan-speed {
@@ -515,11 +578,21 @@ p.section-desc {
     color: var(--text-dark);
     margin-bottom: 24px;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.plan-price .rupee {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    font-weight: 600;
 }
 
 .plan-price .period {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--text-light);
 }
 
@@ -541,6 +614,28 @@ p.section-desc {
 .plan-perks li i {
     color: var(--primary);
     font-size: 0.9rem;
+    min-width: 16px;
+}
+
+.apps-list {
+    margin-bottom: 15px;
+}
+
+.apps-list.multicol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.plan-validity {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 /* Booking Form */
@@ -676,10 +771,19 @@ p.section-desc {
     color: var(--primary);
 }
 
+.footer-contact {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .footer-contact a {
     font-weight: 500;
     color: var(--text-light);
     transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .footer-contact a:hover {
@@ -734,5 +838,15 @@ p.section-desc {
     .footer-top {
         flex-direction: column;
         text-align: center;
+    }
+
+    .footer-contact {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .apps-list.multicol {
+        grid-template-columns: 1fr;
     }
 }
