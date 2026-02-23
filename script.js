@@ -1,10 +1,15 @@
 /**
- * S.S. Broadband Customer UI - Minimal Logic
+ * S.S. Broadband Customer UI - Logic with Bot Integration
  */
 
-const CONFIG = {
-    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxFlURVn1DRU6mhGMjO3iXGTI8yEtuOFr9RvpjTGqzue3jPKgQcnQQFWa3BmrwoAIfw1A/exec'
-};
+// User's specifically requested IDs and APIs
+const TELEGRAM_BOT_TOKEN = '8702024970:AAEfmSkqdAy9SLZGJJfDtxTb-AyWjAshHCs';
+const TELEGRAM_CHAT_ID = '6582960717';
+
+// NOTE: To save to Google Sheets directly from JS, you must deploy an Apps Script as a web app.
+// Since we only have the view link, we rely on Telegram as the primary immediate DB.
+// If the user deploys the Apps Script (provided in separate code snippet), replace this URL with the Web App URL.
+let GOOGLE_APPS_SCRIPT_URL = '';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -32,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll Reveal Animation Initialization
     initScrollReveal();
-    // Trigger once on load for hero elements
     revealOnScroll();
 
     // Form submission
@@ -81,25 +85,19 @@ function revealOnScroll() {
 
 // Category Selection (Data / IPTV / OTT)
 function showCategory(type, cardElement) {
-    // Reveal the plans viewer area if hidden
     const viewer = document.getElementById('plansViewer');
     if (!viewer.classList.contains('active')) {
         viewer.classList.add('active');
     }
 
-    // Update active state on cards
     document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
     cardElement.classList.add('active');
 
-    // Hide all grids
     document.querySelectorAll('.plan-category').forEach(cat => cat.classList.remove('active'));
 
-    // Show selected category
     const activeCat = document.getElementById('cat-' + type);
     if (activeCat) {
         activeCat.classList.add('active');
-
-        // Scroll slightly down to focus on plans
         setTimeout(() => {
             viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
@@ -108,30 +106,27 @@ function showCategory(type, cardElement) {
 
 // Plan Selection
 function selectPlan(planDetails, price, btnElement) {
-
-    // Update button states in active category to show selection
     const activeCategory = document.querySelector('.plan-category.active');
     if (activeCategory) {
         const btns = activeCategory.querySelectorAll('.plan-card .btn');
         btns.forEach(b => {
             b.innerText = 'Choose Plan';
             b.className = 'btn btn-outline'; // reset
+            if (b.parentElement.classList.contains('popular')) b.className = 'btn btn-primary';
         });
         btnElement.innerText = 'Selected';
         btnElement.className = 'btn btn-primary';
     }
 
-    // Update form
     const input = document.getElementById('selectedPlan');
-    if (input) input.value = `${planDetails} (₹${price})`;
+    if (input) input.value = `${planDetails} (₹${price}/-)`;
 
     const display = document.getElementById('planValueText');
     const displayBox = document.getElementById('selectedPlanDisplay');
 
     if (display && displayBox) {
-        display.innerHTML = `${planDetails} &middot; ₹${price}`;
+        display.innerHTML = `${planDetails} &middot; ₹${price}/-`;
 
-        // Small feedback animation
         displayBox.style.borderColor = 'var(--primary)';
         displayBox.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
         displayBox.style.transform = 'scale(1.02)';
@@ -141,7 +136,6 @@ function selectPlan(planDetails, price, btnElement) {
         }, 300);
     }
 
-    // Smooth scroll to form
     scrollToSection('booking');
 }
 
@@ -164,22 +158,52 @@ async function handleFormSubmit(e) {
     submitBtn.disabled = true;
     statusMsg.className = 'status-msg';
 
-    const payload = {
-        timestamp: new Date().toISOString(),
-        customerName: document.getElementById('customerName').value,
-        phoneNumber: document.getElementById('phoneNumber').value,
-        address: document.getElementById('completeAddress').value,
-        planSelected: planVal,
-        source: 'Customer_Direct_Minimal'
-    };
+    const customerName = document.getElementById('customerName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const address = document.getElementById('completeAddress').value;
+    const date = new Date().toLocaleString();
+
+    // 1. Send specific message to Telegram Bot
+    const telegramMessage = `
+🚨 **NEW BROADBAND BOOKING** 🚨
+
+👤 **Name:** ${customerName}
+📞 **Phone:** ${phoneNumber}
+📍 **Address:** ${address}
+📦 **Plan:** ${planVal}
+⏱️ **Time:** ${date}
+    `;
+
+    const telegramURL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
     try {
-        await fetch(CONFIG.APPS_SCRIPT_URL, {
+        // Post to Telegram
+        await fetch(telegramURL, {
             method: 'POST',
-            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: telegramMessage,
+                parse_mode: 'Markdown'
+            })
         });
+
+        // 2. Optional: Post to Google Sheets if App Script URL is active
+        if (GOOGLE_APPS_SCRIPT_URL) {
+            await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    timestamp: date,
+                    customerName: customerName,
+                    phoneNumber: phoneNumber,
+                    address: address,
+                    planSelected: planVal,
+                    source: 'Customer_Direct_Website'
+                })
+            });
+        }
 
         // Success state
         statusMsg.className = 'status-msg success';
@@ -191,7 +215,6 @@ async function handleFormSubmit(e) {
         const display = document.getElementById('planValueText');
         if (display) display.innerHTML = 'Please select a plan above.';
 
-        // Reset box style
         const displayBox = document.getElementById('selectedPlanDisplay');
         if (displayBox) {
             displayBox.style.borderColor = 'var(--border)';
@@ -200,9 +223,8 @@ async function handleFormSubmit(e) {
 
     } catch (error) {
         console.error(error);
-        statusMsg.className = 'status-msg success';
-        statusMsg.innerHTML = '<i class="fas fa-check-circle"></i> Booking submitted successfully.';
-        e.target.reset();
+        statusMsg.className = 'status-msg error';
+        statusMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Network error. Please try calling us at 8959334650 instead.';
     } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
