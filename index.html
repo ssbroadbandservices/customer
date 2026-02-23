@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.S. Broadband | Future Connect</title>
+    <title>S.S. Broadband | Har Pal Har Ghar</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +43,7 @@
             <div class="menu-support">
                 <p>Need help? Call us</p>
                 <a href="tel:9516688921" class="support-number">9516688921</a>
+                <a href="tel:8959334650" class="support-number secondary">8959334650</a>
             </div>
         </div>
     </div>
@@ -50,7 +51,7 @@
     <!-- Minimal Hero -->
     <header class="hero" id="home">
         <div class="hero-inner">
-            <span class="badge reveal-up delay-1">New Generation Network</span>
+            <span class="badge reveal-up delay-1"><i class="fas fa-broadcast-tower"></i> New Generation Network</span>
             <h1 class="hero-title reveal-up delay-2">Seamless.<br>Invisible.<br>Instant.</h1>
             <p class="hero-subtitle reveal-up delay-3">Experience internet so fast, you forget it's there. Connect your
                 home today.</p>
@@ -60,8 +61,11 @@
             </div>
         </div>
 
-        <!-- Abstract minimalist background graphic -->
+        <!-- Abstract minimalist background graphic with specific icons -->
         <div class="hero-graphic">
+            <div class="floating-icon icon-1"><i class="fas fa-wifi"></i></div>
+            <div class="floating-icon icon-2"><i class="fas fa-network-wired"></i></div>
+            <div class="floating-icon icon-3"><i class="fas fa-server"></i></div>
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
         </div>
@@ -71,20 +75,21 @@
     <section class="services section-padding" id="services">
         <div class="container text-center">
             <h2 class="section-title reveal-up">Choose your experience.</h2>
-            <p class="section-desc reveal-up">Select a category to explore our crafted packages.</p>
+            <p class="section-desc reveal-up">Select a category to explore our crafted packages. Every plan includes
+                24x7 support and ZERO installation charges.</p>
 
             <div class="service-cards grid reveal-up delay-2">
 
-                <div class="card service-card" onclick="showCategory('data', this)">
+                <div class="card service-card active" onclick="showCategory('data', this)">
                     <div class="card-icon"><i class="fas fa-rocket"></i></div>
                     <h3>Fiber Internet</h3>
-                    <p>Ultra-low latency connection.</p>
+                    <p>Unlimited data, ultra-low latency.</p>
                 </div>
 
                 <div class="card service-card" onclick="showCategory('iptv', this)">
                     <div class="card-icon"><i class="fas fa-tv"></i></div>
                     <h3>IPTV</h3>
-                    <p>Crystal clear HD streaming.</p>
+                    <p>750+ Live HD Channels.</p>
                 </div>
 
                 <div class="card service-card" onclick="showCategory('ott', this)">
@@ -98,95 +103,263 @@
     </section>
 
     <!-- Dynamic Plans Viewer -->
-    <section class="plans-viewer" id="plansViewer">
+    <section class="plans-viewer active" id="plansViewer">
         <div class="container">
 
             <!-- Data Grid -->
-            <div class="plan-category" id="cat-data">
+            <div class="plan-category active" id="cat-data">
                 <div class="grid plan-grid">
+
                     <div class="card plan-card">
-                        <div class="plan-speed">50 Mbps</div>
-                        <div class="plan-price">₹499<span class="period">/mo</span></div>
+                        <div class="popular-tag" style="background:#6E7485">Best for CCTV only</div>
+                        <div class="plan-speed">20 Mbps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>180<span class="period">/-</span></div>
                         <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> Unlimited Data</li>
-                            <li><i class="fas fa-check"></i> Free Installation</li>
+                            <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
-                        <button class="btn btn-outline" onclick="selectPlan('Data - 50 Mbps', 499, this)">Choose
+                        <button class="btn btn-outline" onclick="selectPlan('Data - 20 Mbps', 180, this)">Choose
                             Plan</button>
                     </div>
+
+                    <div class="card plan-card">
+                        <div class="popular-tag" style="background:#059669">Best for Social Media</div>
+                        <div class="plan-speed">40 Mbps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>400<span class="period">/-</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('Data - 40 Mbps', 400, this)">Choose
+                            Plan</button>
+                    </div>
+
                     <div class="card plan-card popular">
-                        <div class="popular-tag">Most Chosen</div>
-                        <div class="plan-speed">100 Mbps</div>
-                        <div class="plan-price">₹538<span class="period">/mo</span></div>
+                        <div class="popular-tag" style="background:var(--primary)">IPTV Special</div>
+                        <div class="plan-speed">50 Mbps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>457<span class="period">/-</span></div>
                         <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> Unlimited Data</li>
-                            <li><i class="fas fa-check"></i> Free Router</li>
+                            <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="selectPlan('Data - 100 Mbps', 538, this)">Choose
+                        <button class="btn btn-primary" onclick="selectPlan('Data - 50 Mbps', 457, this)">Choose
                             Plan</button>
                     </div>
+
                     <div class="card plan-card">
-                        <div class="plan-speed">200 Mbps</div>
-                        <div class="plan-price">₹1000<span class="period">/mo</span></div>
+                        <div class="popular-tag" style="background:#FF9E00">Best for Gaming</div>
+                        <div class="plan-speed">100 Mbps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>650<span class="period">/-</span></div>
                         <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> Unlimited Data</li>
-                            <li><i class="fas fa-check"></i> Priority Support</li>
+                            <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
-                        <button class="btn btn-outline" onclick="selectPlan('Data - 200 Mbps', 1000, this)">Choose
+                        <button class="btn btn-outline" onclick="selectPlan('Data - 100 Mbps', 650, this)">Choose
                             Plan</button>
                     </div>
+
+                    <div class="card plan-card popular">
+                        <div class="popular-tag" style="background:#e11d48">All Rounder Package</div>
+                        <div class="plan-speed">150 Mbps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>679<span class="period">/-</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('Data - 150 Mbps', 679, this)">Choose
+                            Plan</button>
+                    </div>
+
                 </div>
             </div>
 
             <!-- IPTV Grid -->
             <div class="plan-category" id="cat-iptv">
                 <div class="grid plan-grid">
+
                     <div class="card plan-card popular">
-                        <div class="popular-tag">Hindi Pack</div>
-                        <div class="plan-speed">720+ Channels</div>
-                        <div class="plan-price">₹200<span class="period">/mo</span></div>
+                        <div class="popular-tag">Hindi IPTV</div>
+                        <div class="plan-speed">750+ Live HD</div>
+                        <div class="plan-price"><span class="rupee">₹</span>240<span class="period">/-</span></div>
                         <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> HD Quality</li>
-                            <li><i class="fas fa-check"></i> Sports & Movies</li>
+                            <li><i class="fas fa-check"></i> Hindi Premium Channels</li>
+                            <li><i class="fas fa-headset"></i> 24x7 Support</li>
+                            <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="selectPlan('IPTV - Hindi', 200, this)">Choose
+                        <button class="btn btn-primary" onclick="selectPlan('IPTV - Hindi', 240, this)">Choose
                             Plan</button>
                     </div>
+
                     <div class="card plan-card">
-                        <div class="plan-speed">Bengali Pack</div>
-                        <div class="plan-price">₹220<span class="period">/mo</span></div>
+                        <div class="plan-speed">Telugu HD</div>
+                        <div class="plan-price"><span class="rupee">₹</span>255<span class="period">/-</span></div>
                         <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> HD Quality</li>
+                            <li><i class="fas fa-check"></i> 750+ Live Channels</li>
+                            <li><i class="fas fa-check"></i> Telugu Focus</li>
                         </ul>
-                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Bengali', 220, this)">Choose
+                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Telugu', 255, this)">Choose
                             Plan</button>
                     </div>
+
+                    <div class="card plan-card">
+                        <div class="plan-speed">Marathi HD</div>
+                        <div class="plan-price"><span class="rupee">₹</span>255<span class="period">/-</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> 750+ Live Channels</li>
+                            <li><i class="fas fa-check"></i> Marathi Focus</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Marathi', 255, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card">
+                        <div class="plan-speed">Gujarati HD</div>
+                        <div class="plan-price"><span class="rupee">₹</span>255<span class="period">/-</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> 750+ Live Channels</li>
+                            <li><i class="fas fa-check"></i> Gujarati Focus</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Gujarati', 255, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card">
+                        <div class="plan-speed">Bengali HD</div>
+                        <div class="plan-price"><span class="rupee">₹</span>255<span class="period">/-</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> 750+ Live Channels</li>
+                            <li><i class="fas fa-check"></i> Bengali Focus</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Bengali', 255, this)">Choose
+                            Plan</button>
+                    </div>
+
                 </div>
             </div>
 
             <!-- OTT Grid -->
             <div class="plan-category" id="cat-ott">
-                <div class="grid plan-grid">
-                    <div class="card plan-card popular">
-                        <div class="popular-tag">Mega Pack</div>
-                        <div class="plan-speed">16+ Apps</div>
-                        <div class="plan-price">₹199<span class="period">/28d</span></div>
-                        <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> Hotstar, Zee5, SonyLiv</li>
-                            <li><i class="fas fa-check"></i> Discovery+</li>
-                        </ul>
-                        <button class="btn btn-primary" onclick="selectPlan('OTT - Mega', 199, this)">Choose
-                            Plan</button>
-                    </div>
+                <div class="grid plan-grid ott-grid">
+
                     <div class="card plan-card">
-                        <div class="plan-speed">Value Pack</div>
-                        <div class="plan-price">₹120<span class="period">/28d</span></div>
-                        <ul class="plan-perks">
-                            <li><i class="fas fa-check"></i> Zee5, SonyLiv</li>
+                        <div class="popular-tag" style="background:#6E7485">Value Pack</div>
+                        <div class="plan-speed">4 Premium Apps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>120<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list">
+                            <li><i class="fas fa-play-circle"></i> Sony Liv</li>
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Fancode</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
                         </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
                         <button class="btn btn-outline" onclick="selectPlan('OTT - Value', 120, this)">Choose
                             Plan</button>
                     </div>
+
+                    <div class="card plan-card">
+                        <div class="popular-tag" style="background:#059669">Entertainment Pack</div>
+                        <div class="plan-speed">4 Top Apps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>136<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list">
+                            <li><i class="fas fa-play-circle"></i> Discovery+</li>
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Sony Liv</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
+                        </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
+                        <button class="btn btn-outline" onclick="selectPlan('OTT - Entertainment', 136, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card">
+                        <div class="popular-tag" style="background:#6366f1">Silver Pack</div>
+                        <div class="plan-speed">4 Sports & Series</div>
+                        <div class="plan-price"><span class="rupee">₹</span>155<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list">
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Jio Hotstar</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
+                            <li><i class="fas fa-play-circle"></i> Fancode</li>
+                        </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
+                        <button class="btn btn-outline" onclick="selectPlan('OTT - Silver', 155, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card popular">
+                        <div class="popular-tag">Premium Pack</div>
+                        <div class="plan-speed">4 Elite Apps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>200<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list">
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Sony Liv</li>
+                            <li><i class="fas fa-play-circle"></i> Jio Hotstar</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
+                        </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
+                        <button class="btn btn-primary" onclick="selectPlan('OTT - Premium', 200, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card popular">
+                        <div class="popular-tag" style="background:#e11d48">Mega OTT</div>
+                        <div class="plan-speed">16 Apps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>236<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list multicol">
+                            <li><i class="fas fa-play-circle"></i> Discovery+</li>
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Sony Liv</li>
+                            <li><i class="fas fa-play-circle"></i> Jio Hotstar</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
+                            <li><i class="fas fa-play-circle"></i> Hub Hopper</li>
+                            <li><i class="fas fa-play-circle"></i> Runn</li>
+                            <li><i class="fas fa-play-circle"></i> Shemaro Me</li>
+                            <li><i class="fas fa-play-circle"></i> Shemaro Bhakti</li>
+                            <li><i class="fas fa-play-circle"></i> Stage</li>
+                            <li><i class="fas fa-play-circle"></i> Friday</li>
+                            <li><i class="fas fa-play-circle"></i> Chaupal</li>
+                            <li><i class="fas fa-play-circle"></i> Dangal TV</li>
+                            <li><i class="fas fa-play-circle"></i> Distro TV</li>
+                            <li><i class="fas fa-play-circle"></i> Fancode</li>
+                            <li><i class="fas fa-play-circle"></i> Bollywood</li>
+                        </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
+                        <button class="btn btn-primary" onclick="selectPlan('OTT - Mega', 236, this)">Choose
+                            Plan</button>
+                    </div>
+
+                    <div class="card plan-card popular">
+                        <div class="popular-tag" style="background:#0f172a">Ultimate Pack</div>
+                        <div class="plan-speed">16 Premium Apps</div>
+                        <div class="plan-price"><span class="rupee">₹</span>255<span class="period">/-</span></div>
+                        <ul class="plan-perks apps-list multicol">
+                            <li><i class="fas fa-play-circle"></i> Amazon Prime</li>
+                            <li><i class="fas fa-play-circle"></i> Zee5</li>
+                            <li><i class="fas fa-play-circle"></i> Sony Liv</li>
+                            <li><i class="fas fa-play-circle"></i> Jio Hotstar</li>
+                            <li><i class="fas fa-play-circle"></i> Playflix</li>
+                            <li><i class="fas fa-play-circle"></i> OM TV</li>
+                            <li><i class="fas fa-play-circle"></i> Shemaro Bhakti</li>
+                            <li><i class="fas fa-play-circle"></i> Shemaro Gujrati</li>
+                            <li><i class="fas fa-play-circle"></i> Runn</li>
+                            <li><i class="fas fa-play-circle"></i> OTT Play Prm.</li>
+                            <li><i class="fas fa-play-circle"></i> Hubhopper</li>
+                            <li><i class="fas fa-play-circle"></i> Chaupal</li>
+                            <li><i class="fas fa-play-circle"></i> Dangal Play</li>
+                            <li><i class="fas fa-play-circle"></i> Friday</li>
+                            <li><i class="fas fa-play-circle"></i> Bollywood Play</li>
+                            <li><i class="fas fa-play-circle"></i> Distro TV</li>
+                        </ul>
+                        <p class="plan-validity"><i class="far fa-clock"></i> 28 Days Validity</p>
+                        <button class="btn btn-primary" onclick="selectPlan('OTT - Ultimate', 255, this)">Choose
+                            Plan</button>
+                    </div>
+
                 </div>
             </div>
 
@@ -200,11 +373,16 @@
 
                 <div class="booking-info">
                     <h2>Almost connected.</h2>
-                    <p>Provide your details for installation.</p>
+                    <p>Provide your details for free installation.</p>
 
                     <div class="selected-plan-box" id="selectedPlanDisplay">
                         <span class="label">Your Selection</span>
                         <h3 id="planValueText">Please select a plan above.</h3>
+                    </div>
+
+                    <div class="contact-hint mt-4">
+                        <p><i class="fas fa-headset text-primary"></i> 24x7 Support: <strong>8959334650</strong> /
+                            <strong>9516688921</strong></p>
                     </div>
                 </div>
 
@@ -246,7 +424,10 @@
                     <i class="fas fa-wifi"></i> S.S. Broadband
                 </div>
                 <div class="footer-contact">
-                    <a href="mailto:s.s.broadbandservices02@gmail.com">s.s.broadbandservices02@gmail.com</a>
+                    <a href="mailto:s.s.broadbandservices02@gmail.com"><i class="fas fa-envelope"></i>
+                        s.s.broadbandservices02@gmail.com</a>
+                    <a href="tel:9516688921"><i class="fas fa-phone-alt"></i> 9516688921</a>
+                    <a href="tel:8959334650"><i class="fas fa-phone-alt"></i> 8959334650</a>
                 </div>
             </div>
 
