@@ -1,1341 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Nexus Broadband | High-Speed Internet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.S. Broadband | Future Connect</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0c;
-            color: #ffffff;
-            overflow-x: hidden;
-            line-height: 1.5;
-        }
-
-        /* ===== PERFORMANCE OPTIMIZATIONS ===== */
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px;
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
-
-        /* ===== LOADING SCREEN ===== */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0a0a0c;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .loading-content {
-            text-align: center;
-        }
-
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(0, 136, 255, 0.1);
-            border-top: 2px solid #0088ff;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin { 
-            100% { transform: rotate(360deg); } 
-        }
-
-        .loading-content h2 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #fff;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            background: rgba(18, 18, 22, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 40px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            position: sticky;
-            top: 16px;
-            z-index: 100;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: #0088ff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #0a0a0c;
-        }
-
-        .logo-text h1 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .logo-text p {
-            font-size: 0.7rem;
-            color: #888;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== MENU TOGGLE ===== */
-        .menu-toggle {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s ease;
-        }
-
-        .menu-toggle:active {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .menu-toggle span {
-            width: 18px;
-            height: 2px;
-            background: #fff;
-            border-radius: 2px;
-            transition: all 0.2s ease;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-            width: 16px;
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-            width: 16px;
-        }
-
-        /* ===== SIDE MENU ===== */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 320px;
-            height: 100vh;
-            background: rgba(18, 18, 22, 0.98);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-left: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 2000;
-            transition: right 0.3s ease;
-            padding: 24px 20px;
-        }
-
-        .side-menu.active {
-            right: 0;
-        }
-
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .menu-header h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #0088ff;
-        }
-
-        .close-menu {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-
-        .close-menu:active {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .menu-items {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .menu-item:active {
-            background: rgba(0, 136, 255, 0.1);
-        }
-
-        .menu-item i {
-            width: 32px;
-            height: 32px;
-            background: #0088ff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0a0a0c;
-            font-size: 0.9rem;
-        }
-
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            z-index: 1999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .hero-content h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 24px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 24px;
-        }
-
-        .stat-number {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #0088ff;
-            margin-bottom: 2px;
-        }
-
-        .stat-label {
-            color: #888;
-            font-size: 0.8rem;
-        }
-
-        /* ===== SECTION TITLE ===== */
-        .section-title {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .section-title h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .section-title p {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        /* ===== PACKAGE CARDS ===== */
-        .package-cards {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .package-card {
-            background: rgba(18, 18, 22, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            cursor: pointer;
-        }
-
-        .package-card:active {
-            transform: scale(0.98);
-            border-color: #0088ff;
-        }
-
-        .package-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(0, 136, 255, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #0088ff;
-            margin-bottom: 16px;
-        }
-
-        .package-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .package-card p {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-        }
-
-        .package-features {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .package-features li {
-            padding: 6px 0;
-            color: #ccc;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .package-features i {
-            color: #0088ff;
-            font-size: 0.8rem;
-        }
-
-        .package-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0088ff;
-        }
-
-        .package-price span {
-            font-size: 0.8rem;
-            color: #888;
-            font-weight: 400;
-        }
-
-        /* ===== OTT GRID ===== */
-        .ott-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-
-        .ott-box {
-            background: rgba(18, 18, 22, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px 16px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: background 0.2s ease;
-            cursor: pointer;
-        }
-
-        .ott-box:active {
-            background: rgba(0, 136, 255, 0.05);
-        }
-
-        .ott-box i {
-            font-size: 1.6rem;
-            color: #0088ff;
-            margin-bottom: 10px;
-        }
-
-        .ott-box h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .ott-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0088ff;
-            margin: 6px 0 2px;
-        }
-
-        .ott-channel {
-            color: #888;
-            font-size: 0.75rem;
-        }
-
-        /* ===== PLAN DETAILS SECTION ===== */
-        .plan-details-section {
-            display: none;
-            margin-bottom: 40px;
-        }
-
-        .plan-details-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .back-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s ease;
-        }
-
-        .back-btn:active {
-            background: #0088ff;
-            color: #0a0a0c;
-        }
-
-        .plan-details-header h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .plans-grid-detailed {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .detailed-plan-card {
-            background: rgba(18, 18, 22, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: border-color 0.2s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .detailed-plan-card:active {
-            border-color: #0088ff;
-        }
-
-        .plan-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(0, 136, 255, 0.1);
-            color: #0088ff;
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-
-        .detailed-plan-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-        }
-
-        .plan-speed {
-            color: #0088ff;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-
-        .plan-price-detailed {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0088ff;
-            margin-bottom: 16px;
-        }
-
-        .plan-features-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .plan-features-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-
-        .plan-features-list i {
-            color: #0088ff;
-            font-size: 0.8rem;
-        }
-
-        .select-plan-btn {
-            width: 100%;
-            padding: 14px;
-            background: transparent;
-            border: 1px solid #0088ff;
-            border-radius: 30px;
-            color: #0088ff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .select-plan-btn:active {
-            background: #0088ff;
-            color: #0a0a0c;
-        }
-
-        /* ===== BOOKING FORM ===== */
-        .booking-section {
-            margin-bottom: 40px;
-        }
-
-        .booking-container {
-            background: rgba(18, 18, 22, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 28px;
-            padding: 28px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .booking-container h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .simple-form {
-            width: 100%;
-        }
-
-        .form-row {
-            margin-bottom: 16px;
-        }
-
-        .form-row input,
-        .form-row textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            font-size: 0.95rem;
-            color: #fff;
-            transition: border-color 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-row textarea {
-            border-radius: 20px;
-            min-height: 80px;
-        }
-
-        .form-row input:focus,
-        .form-row textarea:focus {
-            outline: none;
-            border-color: #0088ff;
-        }
-
-        .form-row input::placeholder,
-        .form-row textarea::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: #0088ff;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #0a0a0c;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .submit-btn:active {
-            opacity: 0.8;
-        }
-
-        /* ===== SUCCESS MESSAGE ===== */
-        .success-message {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(18, 18, 22, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 28px;
-            border: 1px solid rgba(0, 136, 255, 0.2);
-            display: none;
-        }
-
-        .success-icon {
-            width: 64px;
-            height: 64px;
-            background: #0088ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 2rem;
-            color: #0a0a0c;
-        }
-
-        .success-message h2 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-        }
-
-        .success-message p {
-            color: #aaa;
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-        }
-
-        .new-booking-btn {
-            padding: 12px 32px;
-            background: transparent;
-            border: 1px solid #0088ff;
-            border-radius: 30px;
-            color: #0088ff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .new-booking-btn:active {
-            background: #0088ff;
-            color: #0a0a0c;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            margin-top: 40px;
-            padding: 24px 16px 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            text-align: center;
-        }
-
-        .developer-credit {
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-            color: #666;
-        }
-
-        .developer-credit .name {
-            color: #0088ff;
-            font-weight: 600;
-        }
-
-        .copyright {
-            color: #444;
-            font-size: 0.8rem;
-        }
-
-        /* ===== NOTIFICATIONS ===== */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            left: 20px;
-            background: #0088ff;
-            color: #0a0a0c;
-            padding: 14px 18px;
-            border-radius: 30px;
-            z-index: 10000;
-            font-weight: 500;
-            font-size: 0.95rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.2s ease;
-            pointer-events: none;
-            text-align: center;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== MEDIA QUERIES ===== */
-        @media (min-width: 480px) {
-            .ott-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 640px) {
-            .package-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .plans-grid-detailed {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .hero {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
-            
-            .hero-content h2 {
-                font-size: 2.8rem;
-            }
-            
-            .ott-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .notification {
-                left: auto;
-                right: 20px;
-                min-width: 300px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .package-cards {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .plans-grid-detailed {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* ===== UTILITY CLASSES ===== */
-        .hidden {
-            display: none !important;
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loader"></div>
-            <h2>NEXUS</h2>
-        </div>
-    </div>
 
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-
-    <!-- Main Container -->
-    <div class="container" id="mainContainer">
-        <!-- Header -->
-        <header>
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-wifi"></i>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-wifi logo-icon"></i>
                 <div class="logo-text">
-                    <h1>NEXUS</h1>
-                    <p>BROADBAND</p>
+                    <span class="brand">S.S. Broadband</span>
                 </div>
-            </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </header>
+            </a>
 
-        <!-- Side Menu -->
-        <div class="side-menu" id="sideMenu">
-            <div class="menu-header">
-                <h3>MENU</h3>
-                <div class="close-menu" id="closeMenu">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
-            <div class="menu-items">
-                <div class="menu-item" onclick="showPlans('data')">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Data Plans</span>
-                </div>
-                <div class="menu-item" onclick="showPlans('iptv')">
-                    <i class="fas fa-tv"></i>
-                    <span>IPTV Plans</span>
-                </div>
-                <div class="menu-item" onclick="showPlans('ott')">
-                    <i class="fas fa-film"></i>
-                    <span>OTT Bundles</span>
-                </div>
-                <div class="menu-item" onclick="showPlans('support')">
-                    <i class="fas fa-headset"></i>
-                    <span>Support</span>
-                </div>
+            <div class="menu-btn" id="menuBtn">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
             </div>
         </div>
-        <div class="menu-overlay" id="menuOverlay"></div>
+    </nav>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Lightning Fast<br>Internet</h2>
-                <p>Experience seamless connectivity with our premium fiber optic broadband.</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">10K+</div>
-                        <div class="stat-label">Happy Users</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">1Gbps</div>
-                        <div class="stat-label">Max Speed</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Package Cards -->
-        <section class="package-cards">
-            <div class="package-card" onclick="showPlans('data')">
-                <div class="package-icon">
-                    <i class="fas fa-tachometer-alt"></i>
-                </div>
-                <h3>Data Plans</h3>
-                <p>High-speed internet for home & business</p>
-                <ul class="package-features">
-                    <li><i class="fas fa-check"></i> 20 Mbps to 1 Gbps</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                </ul>
-                <div class="package-price">299<span>/mo</span></div>
-            </div>
-            <div class="package-card" onclick="showPlans('iptv')">
-                <div class="package-icon">
-                    <i class="fas fa-tv"></i>
-                </div>
-                <h3>IPTV Plans</h3>
-                <p>700+ HD channels in your language</p>
-                <ul class="package-features">
-                    <li><i class="fas fa-check"></i> Hindi, English, Regional</li>
-                    <li><i class="fas fa-check"></i> Sports & Movies</li>
-                </ul>
-                <div class="package-price">199<span>/mo</span></div>
-            </div>
-            <div class="package-card" onclick="showPlans('ott')">
-                <div class="package-icon">
-                    <i class="fas fa-film"></i>
-                </div>
-                <h3>OTT Bundles</h3>
-                <p>15+ premium streaming apps</p>
-                <ul class="package-features">
-                    <li><i class="fas fa-check"></i> Netflix, Prime, Hotstar</li>
-                    <li><i class="fas fa-check"></i> Family Sharing</li>
-                </ul>
-                <div class="package-price">399<span>/mo</span></div>
-            </div>
-        </section>
-
-        <!-- OTT Showcase -->
-        <div class="section-title">
-            <h2>Popular Bundles</h2>
-            <p>Most loved entertainment packs</p>
-        </div>
-        <section class="ott-grid">
-            <div class="ott-box" onclick="showPlans('hindi')">
-                <i class="fas fa-language"></i>
-                <h4>Hindi IPTV</h4>
-                <div class="ott-price">₹199</div>
-                <div class="ott-channel">720+ Channels</div>
-            </div>
-            <div class="ott-box" onclick="showPlans('english')">
-                <i class="fas fa-film"></i>
-                <h4>English IPTV</h4>
-                <div class="ott-price">₹249</div>
-                <div class="ott-channel">500+ Channels</div>
-            </div>
-            <div class="ott-box" onclick="showPlans('sports')">
-                <i class="fas fa-futbol"></i>
-                <h4>Sports Pack</h4>
-                <div class="ott-price">₹299</div>
-                <div class="ott-channel">All Sports</div>
-            </div>
-            <div class="ott-box" onclick="showPlans('mega')">
-                <i class="fas fa-crown"></i>
-                <h4>Mega OTT</h4>
-                <div class="ott-price">₹499</div>
-                <div class="ott-channel">15+ Apps</div>
-            </div>
-        </section>
-
-        <!-- Plan Details Section -->
-        <div class="plan-details-section" id="planDetailsSection">
-            <div class="plan-details-header">
-                <div class="back-btn" onclick="hidePlans()">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <h2 id="planTitle">Data Plans</h2>
-            </div>
-            <div class="plans-grid-detailed" id="plansGrid">
-                <!-- JS will populate -->
+    <!-- Clean Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <a href="#services" class="menu-link" onclick="closeMenu()">Explore Plans</a>
+            <a href="#booking" class="menu-link" onclick="closeMenu()">Book Connection</a>
+            <div class="menu-support">
+                <p>Need help? Call us</p>
+                <a href="tel:9516688921" class="support-number">9516688921</a>
             </div>
         </div>
-
-        <!-- Booking Form -->
-        <section class="booking-section" id="bookingSection">
-            <div class="booking-container">
-                <h3>Book Connection</h3>
-                <form class="simple-form" id="bookingForm" onsubmit="return false;">
-                    <div class="form-row">
-                        <input type="text" id="customerName" placeholder="Full Name *" required>
-                    </div>
-                    <div class="form-row">
-                        <input type="tel" id="phoneNumber" placeholder="Mobile Number *" required maxlength="10">
-                    </div>
-                    <div class="form-row">
-                        <input type="email" id="email" placeholder="Email (Optional)">
-                    </div>
-                    <div class="form-row">
-                        <input type="text" id="area" placeholder="Area / Locality *" required>
-                    </div>
-                    <div class="form-row">
-                        <textarea id="address" placeholder="Complete Address (Optional)"></textarea>
-                    </div>
-                    <div class="form-row">
-                        <input type="text" id="selectedPlan" placeholder="Selected Plan" readonly value="Not selected">
-                    </div>
-                    <button type="button" class="submit-btn" onclick="submitBooking()">
-                        <i class="fas fa-paper-plane"></i> SUBMIT
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
-            <div class="success-icon">
-                <i class="fas fa-check"></i>
-            </div>
-            <h2>Thank You!</h2>
-            <p>We'll contact you within 2 hours</p>
-            <button class="new-booking-btn" onclick="resetForm()">New Booking</button>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <div class="developer-credit">
-                <span class="name">Harsh_Labs</span> | Premium Internet Services
-            </div>
-            <div class="copyright">
-                © 2024 Nexus Broadband
-            </div>
-        </footer>
     </div>
 
-    <script>
-        // ===== CONFIGURATION =====
-        const CONFIG = {
-            TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',  // अपना टोकन डालें
-            TELEGRAM_CHAT_ID: 'YOUR_CHAT_ID_HERE',      // अपना Chat ID डालें
-            GOOGLE_APPS_SCRIPT_URL: 'YOUR_GOOGLE_SCRIPT_URL_HERE'  // Google Apps Script URL डालें
-        };
+    <!-- Minimal Hero -->
+    <header class="hero" id="home">
+        <div class="hero-inner">
+            <span class="badge reveal-up delay-1">New Generation Network</span>
+            <h1 class="hero-title reveal-up delay-2">Seamless.<br>Invisible.<br>Instant.</h1>
+            <p class="hero-subtitle reveal-up delay-3">Experience internet so fast, you forget it's there. Connect your
+                home today.</p>
+            <div class="hero-actions reveal-up delay-4">
+                <button class="btn btn-primary" onclick="scrollToSection('services')">View Plans <i
+                        class="fas fa-arrow-down"></i></button>
+            </div>
+        </div>
 
-        // ===== GLOBAL VARIABLES =====
-        let selectedPlan = 'Not selected';
-        let currentPlans = 'data';
+        <!-- Abstract minimalist background graphic -->
+        <div class="hero-graphic">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+        </div>
+    </header>
 
-        // ===== LOADING SCREEN =====
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                }, 300);
-            }, 500);
-        });
+    <!-- Services Selection -->
+    <section class="services section-padding" id="services">
+        <div class="container text-center">
+            <h2 class="section-title reveal-up">Choose your experience.</h2>
+            <p class="section-desc reveal-up">Select a category to explore our crafted packages.</p>
 
-        // ===== MENU TOGGLE =====
-        const menuToggle = document.getElementById('menuToggle');
-        const sideMenu = document.getElementById('sideMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const closeMenu = document.getElementById('closeMenu');
+            <div class="service-cards grid reveal-up delay-2">
 
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-            sideMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.style.overflow = sideMenu.classList.contains('active') ? 'hidden' : 'auto';
-        });
+                <div class="card service-card" onclick="showCategory('data', this)">
+                    <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Fiber Internet</h3>
+                    <p>Ultra-low latency connection.</p>
+                </div>
 
-        function closeMenuFunction() {
-            menuToggle.classList.remove('active');
-            sideMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+                <div class="card service-card" onclick="showCategory('iptv', this)">
+                    <div class="card-icon"><i class="fas fa-tv"></i></div>
+                    <h3>IPTV</h3>
+                    <p>Crystal clear HD streaming.</p>
+                </div>
 
-        closeMenu.addEventListener('click', closeMenuFunction);
-        menuOverlay.addEventListener('click', closeMenuFunction);
+                <div class="card service-card" onclick="showCategory('ott', this)">
+                    <div class="card-icon"><i class="fas fa-film"></i></div>
+                    <h3>OTT Bundles</h3>
+                    <p>Endless entertainment apps.</p>
+                </div>
 
-        // ===== SHOW PLANS =====
-        function showPlans(type) {
-            closeMenuFunction();
-            
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.package-cards').style.display = 'none';
-            document.querySelector('.ott-grid').style.display = 'none';
-            document.querySelector('.section-title').style.display = 'none';
-            
-            const planSection = document.getElementById('planDetailsSection');
-            planSection.style.display = 'block';
-            
-            currentPlans = type;
-            document.getElementById('planTitle').innerText = getPlanTitle(type);
-            document.getElementById('plansGrid').innerHTML = getPlansHTML(type);
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            </div>
+        </div>
+    </section>
 
-        function hidePlans() {
-            document.getElementById('planDetailsSection').style.display = 'none';
-            
-            document.querySelector('.hero').style.display = 'flex';
-            document.querySelector('.package-cards').style.display = 'grid';
-            document.querySelector('.ott-grid').style.display = 'grid';
-            document.querySelector('.section-title').style.display = 'block';
-        }
+    <!-- Dynamic Plans Viewer -->
+    <section class="plans-viewer" id="plansViewer">
+        <div class="container">
 
-        function getPlanTitle(type) {
-            const titles = {
-                'data': '⚡ Data Plans',
-                'iptv': '📺 IPTV Plans',
-                'ott': '🎬 OTT Bundles',
-                'hindi': '🇮🇳 Hindi IPTV',
-                'english': '🇬🇧 English IPTV',
-                'sports': '⚽ Sports Pack',
-                'mega': '👑 Mega OTT',
-                'support': '📞 Support'
-            };
-            return titles[type] || 'Plans';
-        }
-
-        function getPlansHTML(type) {
-            const plans = {
-                'data': [
-                    { name: 'STARTER', speed: '30 Mbps', price: '399', features: ['Unlimited Data (3300GB FUP)', '30 Days Validity', 'Free Router'] },
-                    { name: 'PRO', speed: '50 Mbps', price: '499', features: ['Unlimited Data (5000GB FUP)', '30 Days Validity', 'Free WiFi Router'] },
-                    { name: 'ULTRA', speed: '100 Mbps', price: '699', features: ['Unlimited Data (7500GB FUP)', '30 Days Validity', 'WiFi 6 Router'] },
-                    { name: 'GAMER', speed: '200 Mbps', price: '999', badge: 'BEST VALUE', features: ['Unlimited Data (10TB FUP)', '30 Days Validity', 'Gaming Router'] }
-                ],
-                'iptv': [
-                    { name: 'HINDI BASIC', speed: '600+ Channels', price: '199', features: ['Star Plus, Zee TV, Sony', 'Colors, &TV', 'News Channels'] },
-                    { name: 'ENGLISH', speed: '500+ Channels', price: '249', features: ['HBO, BBC, CNN', 'National Geographic', 'Movies Now'] },
-                    { name: 'PREMIUM', speed: '1000+ Channels', price: '499', badge: 'POPULAR', features: ['All Languages', 'All Sports', '4K Streaming'] }
-                ],
-                'ott': [
-                    { name: 'ENTERTAINMENT', speed: '4 Apps', price: '134', features: ['Discovery+', 'Zee5', 'Sony Liv', 'Playflix'] },
-                    { name: 'PREMIUM', speed: '4 Apps', price: '200', features: ['Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix'] },
-                    { name: 'MEGA OTT', speed: '15+ Apps', price: '399', badge: 'BEST SELLER', features: ['Discovery+', 'Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix', 'Chaupal'] },
-                    { name: 'ULTIMATE', speed: '16+ Apps', price: '258', features: ['Amazon Prime', 'Zee5', 'Sony Liv', 'Jio Hotstar', 'Playflix', 'Chaupal', 'Fancode'] }
-                ]
-            };
-
-            if (plans[type]) {
-                return plans[type].map(plan => `
-                    <div class="detailed-plan-card" onclick="selectPlan('${plan.name} - ₹${plan.price}/month')">
-                        ${plan.badge ? `<span class="plan-badge">${plan.badge}</span>` : ''}
-                        <h3>${plan.name}</h3>
-                        <div class="plan-speed">${plan.speed}</div>
-                        <div class="plan-price-detailed">₹${plan.price}</div>
-                        <ul class="plan-features-list">
-                            ${plan.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+            <!-- Data Grid -->
+            <div class="plan-category" id="cat-data">
+                <div class="grid plan-grid">
+                    <div class="card plan-card">
+                        <div class="plan-speed">50 Mbps</div>
+                        <div class="plan-price">₹499<span class="period">/mo</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> Unlimited Data</li>
+                            <li><i class="fas fa-check"></i> Free Installation</li>
                         </ul>
-                        <button class="select-plan-btn" onclick="event.stopPropagation(); selectPlan('${plan.name} - ₹${plan.price}/month')">SELECT PLAN</button>
+                        <button class="btn btn-outline" onclick="selectPlan('Data - 50 Mbps', 499, this)">Choose
+                            Plan</button>
                     </div>
-                `).join('');
-            }
-            
-            return '<div class="detailed-plan-card" style="grid-column: span 3; text-align: center;">Support: 9516688921</div>';
-        }
+                    <div class="card plan-card popular">
+                        <div class="popular-tag">Most Chosen</div>
+                        <div class="plan-speed">100 Mbps</div>
+                        <div class="plan-price">₹538<span class="period">/mo</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> Unlimited Data</li>
+                            <li><i class="fas fa-check"></i> Free Router</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('Data - 100 Mbps', 538, this)">Choose
+                            Plan</button>
+                    </div>
+                    <div class="card plan-card">
+                        <div class="plan-speed">200 Mbps</div>
+                        <div class="plan-price">₹1000<span class="period">/mo</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> Unlimited Data</li>
+                            <li><i class="fas fa-check"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('Data - 200 Mbps', 1000, this)">Choose
+                            Plan</button>
+                    </div>
+                </div>
+            </div>
 
-        // ===== SELECT PLAN =====
-        function selectPlan(plan) {
-            selectedPlan = plan;
-            document.getElementById('selectedPlan').value = plan;
-            hidePlans();
-            document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
-            showNotification('✅ Plan selected: ' + plan);
-        }
+            <!-- IPTV Grid -->
+            <div class="plan-category" id="cat-iptv">
+                <div class="grid plan-grid">
+                    <div class="card plan-card popular">
+                        <div class="popular-tag">Hindi Pack</div>
+                        <div class="plan-speed">720+ Channels</div>
+                        <div class="plan-price">₹200<span class="period">/mo</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> HD Quality</li>
+                            <li><i class="fas fa-check"></i> Sports & Movies</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('IPTV - Hindi', 200, this)">Choose
+                            Plan</button>
+                    </div>
+                    <div class="card plan-card">
+                        <div class="plan-speed">Bengali Pack</div>
+                        <div class="plan-price">₹220<span class="period">/mo</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> HD Quality</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('IPTV - Bengali', 220, this)">Choose
+                            Plan</button>
+                    </div>
+                </div>
+            </div>
 
-        // ===== SUBMIT BOOKING =====
-        async function submitBooking() {
-            const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('phoneNumber').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const area = document.getElementById('area').value.trim();
-            const address = document.getElementById('address').value.trim();
-            const plan = document.getElementById('selectedPlan').value;
+            <!-- OTT Grid -->
+            <div class="plan-category" id="cat-ott">
+                <div class="grid plan-grid">
+                    <div class="card plan-card popular">
+                        <div class="popular-tag">Mega Pack</div>
+                        <div class="plan-speed">16+ Apps</div>
+                        <div class="plan-price">₹199<span class="period">/28d</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> Hotstar, Zee5, SonyLiv</li>
+                            <li><i class="fas fa-check"></i> Discovery+</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('OTT - Mega', 199, this)">Choose
+                            Plan</button>
+                    </div>
+                    <div class="card plan-card">
+                        <div class="plan-speed">Value Pack</div>
+                        <div class="plan-price">₹120<span class="period">/28d</span></div>
+                        <ul class="plan-perks">
+                            <li><i class="fas fa-check"></i> Zee5, SonyLiv</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('OTT - Value', 120, this)">Choose
+                            Plan</button>
+                    </div>
+                </div>
+            </div>
 
-            if (!name) { showNotification('❌ Please enter your name'); return; }
-            if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) { showNotification('❌ Enter valid 10-digit number'); return; }
-            if (!area) { showNotification('❌ Please enter your area'); return; }
+        </div>
+    </section>
 
-            const bookingData = {
-                name, phone, email, area, address, plan,
-                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-            };
+    <!-- Booking Form -->
+    <section class="booking section-padding" id="booking">
+        <div class="container">
+            <div class="booking-wrapper card reveal-up">
 
-            showNotification('📤 Submitting...');
+                <div class="booking-info">
+                    <h2>Almost connected.</h2>
+                    <p>Provide your details for installation.</p>
 
-            // 1. Save to Google Sheets
-            try {
-                await saveToGoogleSheets(bookingData);
-            } catch (e) {
-                console.log('Google Sheets error:', e);
-            }
+                    <div class="selected-plan-box" id="selectedPlanDisplay">
+                        <span class="label">Your Selection</span>
+                        <h3 id="planValueText">Please select a plan above.</h3>
+                    </div>
+                </div>
 
-            // 2. Send to Telegram
-            try {
-                await sendToTelegram(bookingData);
-            } catch (e) {
-                console.log('Telegram error:', e);
-            }
+                <div class="booking-form-area">
+                    <form id="bookingForm" class="clean-form">
+                        <input type="hidden" id="selectedPlan" name="selectedPlan" required>
 
-            // 3. Save locally
-            saveToLocalStorage(bookingData);
+                        <div class="input-wrap">
+                            <input type="text" id="customerName" required placeholder="Full Name" autocomplete="off">
+                        </div>
 
-            // Show success
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.package-cards').style.display = 'none';
-            document.querySelector('.ott-grid').style.display = 'none';
-            document.querySelector('.section-title').style.display = 'none';
-            document.getElementById('planDetailsSection').style.display = 'none';
-            document.getElementById('bookingSection').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            
-            showNotification('✅ Booking submitted successfully!');
-        }
+                        <div class="input-wrap">
+                            <input type="tel" id="phoneNumber" required placeholder="10-Digit Mobile Number"
+                                maxlength="10" autocomplete="off">
+                        </div>
 
-        // ===== GOOGLE SHEETS =====
-        async function saveToGoogleSheets(data) {
-            if (CONFIG.GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-                console.log('Google Sheets not configured');
-                return;
-            }
+                        <div class="input-wrap">
+                            <textarea id="completeAddress" required placeholder="Complete Installation Address"
+                                rows="3"></textarea>
+                        </div>
 
-            try {
-                const response = await fetch(CONFIG.GOOGLE_APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                console.log('Data sent to Google Sheets');
-            } catch (error) {
-                console.error('Google Sheets error:', error);
-            }
-        }
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                            Confirm Booking <i class="fas fa-check"></i>
+                        </button>
 
-        // ===== TELEGRAM BOT =====
-        async function sendToTelegram(data) {
-            if (CONFIG.TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
-                console.log('Telegram not configured');
-                return;
-            }
+                        <div id="statusMessage" class="status-msg"></div>
+                    </form>
+                </div>
 
-            const message = `
-🔔 *New Booking Alert* 🔔
-────────────────
-👤 *Name:* ${data.name}
-📞 *Phone:* ${data.phone}
-📧 *Email:* ${data.email || 'Not provided'}
-📍 *Area:* ${data.area}
-🏠 *Address:* ${data.address || 'Not provided'}
-📦 *Plan:* ${data.plan}
-⏰ *Time:* ${data.timestamp}
-────────────────
-            `;
+            </div>
+        </div>
+    </section>
 
-            try {
-                const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`;
-                await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CONFIG.TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-                console.log('Message sent to Telegram');
-            } catch (error) {
-                console.error('Telegram error:', error);
-            }
-        }
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <i class="fas fa-wifi"></i> S.S. Broadband
+                </div>
+                <div class="footer-contact">
+                    <a href="mailto:s.s.broadbandservices02@gmail.com">s.s.broadbandservices02@gmail.com</a>
+                </div>
+            </div>
 
-        // ===== LOCAL STORAGE =====
-        function saveToLocalStorage(data) {
-            try {
-                let bookings = JSON.parse(localStorage.getItem('nexus_bookings') || '[]');
-                bookings.push(data);
-                if (bookings.length > 50) bookings = bookings.slice(-50);
-                localStorage.setItem('nexus_bookings', JSON.stringify(bookings));
-            } catch (error) {
-                console.error('Local storage error:', error);
-            }
-        }
+            <div class="footer-bottom">
+                <div class="developer-credit">
+                    Website Developer &middot; <span class="dev-name">Harsh_Labs</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        // ===== RESET FORM =====
-        function resetForm() {
-            document.getElementById('bookingForm').reset();
-            document.getElementById('selectedPlan').value = 'Not selected';
-            selectedPlan = 'Not selected';
-            
-            document.querySelector('.hero').style.display = 'flex';
-            document.querySelector('.package-cards').style.display = 'grid';
-            document.querySelector('.ott-grid').style.display = 'grid';
-            document.querySelector('.section-title').style.display = 'block';
-            document.getElementById('bookingSection').style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ===== NOTIFICATION =====
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // ===== PHONE VALIDATION =====
-        document.getElementById('phoneNumber').addEventListener('input', function(e) {
-            this.value = this.value.replace(/\D/g, '').slice(0, 10);
-        });
-
-        // ===== AUTO-SELECT PLAN FROM URL (Optional) =====
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const planParam = urlParams.get('plan');
-            if (planParam) {
-                selectPlan(decodeURIComponent(planParam));
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
