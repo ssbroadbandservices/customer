@@ -40,6 +40,8 @@
         <div class="menu-content">
             <a href="#services" class="menu-link" onclick="closeMenu()">Explore Plans</a>
             <a href="#booking" class="menu-link" onclick="closeMenu()">Book Connection</a>
+            <!-- New Complaint Link -->
+            <a href="#complaint" class="menu-link" onclick="openComplaintForm(); closeMenu();">Register Complaint</a>
             <div class="menu-support">
                 <p>Need help? Call us</p>
                 <a href="tel:9516688921" class="support-number">9516688921</a>
@@ -126,9 +128,10 @@
                     <div class="card plan-card">
                         <div class="popular-tag" style="background:#059669">Best for Social Media</div>
                         <div class="plan-speed">40 Mbps</div>
-                        <div class="plan-price"><span class="rupee">₹</span>400<span class="period">/-</span></div>
+                        <div class="plan-price"><span class="rupee">₹</span>450<span class="period">/-</span></div>
                         <ul class="plan-perks">
                             <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-infinity"></i> IPTV Pack (hindi) 750+ HD Channels</li>
                             <li><i class="fas fa-headset"></i> 24x7 Support</li>
                             <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
@@ -139,9 +142,10 @@
                     <div class="card plan-card popular">
                         <div class="popular-tag" style="background:var(--primary)">IPTV Special</div>
                         <div class="plan-speed">50 Mbps</div>
-                        <div class="plan-price"><span class="rupee">₹</span>457<span class="period">/-</span></div>
+                        <div class="plan-price"><span class="rupee">₹</span>477<span class="period">/-</span></div>
                         <ul class="plan-perks">
                             <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-infinity"></i> IPTV Pack (hindi) 750+ HD Channels</li>
                             <li><i class="fas fa-headset"></i> 24x7 Support</li>
                             <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
@@ -155,6 +159,7 @@
                         <div class="plan-price"><span class="rupee">₹</span>650<span class="period">/-</span></div>
                         <ul class="plan-perks">
                             <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                            <li><i class="fas fa-infinity"></i> IPTV Pack (hindi) 750+ HD Channels</li>
                             <li><i class="fas fa-headset"></i> 24x7 Support</li>
                             <li><i class="fas fa-tools"></i> No Installation Charge</li>
                         </ul>
@@ -415,6 +420,54 @@
             </div>
         </div>
     </section>
+
+    <!-- NEW: Complaint Form Modal (Hidden by default) -->
+    <div class="complaint-modal" id="complaintModal">
+        <div class="complaint-modal-content card">
+            <div class="complaint-header">
+                <h2><i class="fas fa-exclamation-triangle" style="color: var(--primary);"></i> Register Complaint</h2>
+                <button class="complaint-close" onclick="closeComplaintForm()">&times;</button>
+            </div>
+            
+            <form id="complaintForm" class="clean-form">
+                <div class="input-wrap">
+                    <input type="text" id="complaintName" required placeholder="Full Name" autocomplete="off">
+                </div>
+
+                <div class="input-wrap">
+                    <input type="tel" id="complaintPhone" required placeholder="10-Digit Mobile Number" maxlength="10" autocomplete="off">
+                </div>
+
+                <div class="input-wrap">
+                    <textarea id="complaintAddress" required placeholder="Complete Address" rows="2"></textarea>
+                </div>
+
+                <!-- Optional Complaint Type -->
+                <div class="input-wrap">
+                    <select id="complaintType" class="complaint-select">
+                        <option value="" disabled selected>– Select issue type (optional) –</option>
+                        <option value="Speed is slow">🐢 Speed is slow / down</option>
+                        <option value="Adapter is faulty">🔌 Adapter kharab ho gaya</option>
+                        <option value="Website not opening">🌐 Koi website nahi khul rahi (WiFi)</option>
+                        <option value="Frequent disconnection">📡 Frequent disconnection</option>
+                        <option value="No internet">🚫 No internet / light not coming</option>
+                        <option value="Billing issue">💰 Billing / payment issue</option>
+                        <option value="Other">📝 Other (please describe)</option>
+                    </select>
+                </div>
+
+                <div class="input-wrap">
+                    <textarea id="complaintDescription" placeholder="Describe your issue in detail (optional)" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="complaintSubmitBtn">
+                    Submit Complaint <i class="fas fa-paper-plane"></i>
+                </button>
+
+                <div id="complaintStatusMessage" class="status-msg"></div>
+            </form>
+        </div>
+    </div>
 
     <!-- Clean Footer -->
     <footer class="footer">
